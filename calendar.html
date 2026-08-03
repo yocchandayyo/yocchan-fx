@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>経済指標カレンダー | よっちゃんのFX</title>
+<meta name="description" content="今週の主要経済指標を日本時間でまとめたカレンダー。重要度と市場予想もひと目で確認できます。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@700;900&family=Noto+Sans+JP:wght@400;500;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="assets/img/fx_icon.png?v=3">
+<link rel="stylesheet" href="assets/css/style.css?v=3">
+</head>
+<body data-page="calendar">
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="よっちゃんのFX ホーム">
+      <img class="avatar" src="assets/img/fx_icon.png?v=3" alt="">
+      <span>よっちゃんのFX<small>YOCCHAN'S FX</small></span>
+    </a>
+    <nav class="global-nav" aria-label="グローバルナビゲーション">
+      <a href="index.html">ホーム</a>
+      <a href="articles.html">記事一覧</a>
+      <a href="calendar.html" class="active">経済指標</a>
+      <a href="about.html">このサイトについて</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="page-head">
+    <p class="crumb">CALENDAR</p>
+    <h1>経済指標カレンダー</h1>
+    <p class="desc" id="calRange"></p>
+  </div>
+
+  <div class="legend">
+    <span><span class="dot hi"></span>重要度 高</span>
+    <span><span class="dot mid"></span>中</span>
+    <span><span class="dot lo"></span>低</span>
+  </div>
+
+  <table class="cal-table">
+    <thead>
+      <tr>
+        <th>時刻</th><th>国</th><th>指標名</th>
+        <th class="num prev">前回</th><th class="num">予想</th><th class="num">結果</th>
+      </tr>
+    </thead>
+    <tbody id="calBody"></tbody>
+  </table>
+
+  <div class="tip-box"><b>🦉 ヨル教授メモ:</b> 重要度「高」の指標は発表前後で値動きが急に大きくなります。慣れないうちは発表の15分前にはポジションを整理しておくと安心です。</div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <nav class="fnav" aria-label="フッターナビゲーション">
+      <a href="index.html">ホーム</a>
+      <a href="articles.html">記事一覧</a>
+      <a href="calendar.html">経済指標カレンダー</a>
+      <a href="about.html">このサイトについて</a>
+      <a href="disclaimer.html">免責事項</a>
+    </nav>
+    <p class="legal">当サイトは情報提供を目的としたもので、特定の金融商品の売買を推奨・勧誘するものではありません。投資の最終判断はご自身の責任でお願いします。FX取引は元本を上回る損失が発生するおそれがあります。<br>© 2026 よっちゃんのFX</p>
+  </div>
+</footer>
+
+<script src="assets/js/app.js?v=3"></script>
+</body>
+</html>
