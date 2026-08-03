@@ -65,6 +65,8 @@ img { max-width: 100%; display: block; }
   font-weight: 900;
   font-size: 19px;
   letter-spacing: .02em;
+  white-space: nowrap;
+  flex: none;
 }
 .brand .avatar {
   width: 34px;
@@ -95,6 +97,7 @@ img { max-width: 100%; display: block; }
   padding: 7px 13px;
   border-radius: 99px;
   transition: color .15s, background .15s;
+  white-space: nowrap;
 }
 .global-nav a:hover { color: var(--primary); background: var(--primary-soft); }
 .global-nav a.active { color: var(--primary); background: var(--primary-soft); font-weight: 700; }
@@ -579,6 +582,7 @@ img { max-width: 100%; display: block; }
   text-align: left;
   background: var(--bg);
   padding: 10px 16px;
+  white-space: nowrap;
 }
 .cal-table th.num, .cal-table td.num { text-align: right; font-family: var(--font-data); font-size: 13px; }
 .cal-table td { padding: 11px 16px; border-top: 1px solid var(--line); }
@@ -649,13 +653,45 @@ img { max-width: 100%; display: block; }
   .featured { grid-template-columns: 1fr; }
   .featured .visual { min-height: 180px; }
 }
+@media (max-width: 720px) {
+  /* ヘッダーを2段(上=ブランド、下=ナビ)に組み替える */
+  .site-header .wrap {
+    flex-wrap: wrap;
+    height: auto;
+    gap: 0;
+    padding: 10px 16px 8px;
+  }
+  .global-nav {
+    margin-left: 0;
+    width: 100%;
+    justify-content: space-between;
+    gap: 0;
+    margin-top: 6px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .global-nav::-webkit-scrollbar { display: none; }
+  .global-nav a { padding: 6px 10px; font-size: 13px; }
+  .wrap { padding: 0 16px; }
+}
 @media (max-width: 560px) {
-  .global-nav a { padding: 6px 9px; font-size: 12.5px; }
+  .brand { font-size: 17px; }
+  .brand .avatar { width: 30px; height: 30px; }
   .brand small { display: none; }
-  .rate-card .price { font-size: 22px; }
+  .rate-card { padding: 13px 14px 10px; }
+  .rate-card .price { font-size: 21px; }
   .article-card .lead-line { display: none; }
   .article-detail h1 { font-size: 21px; }
+  .page-head h1 { font-size: 22px; }
+  .featured .body { padding: 20px 18px; }
+  .featured .body h2 { font-size: 18px; }
+  .widget { padding: 16px 18px; }
+  .cal-table { font-size: 12.5px; }
+  .cal-table td { padding: 9px 8px; }
+  .cal-table th { padding: 8px 8px; }
   .cal-table th.prev, .cal-table td.prev { display: none; }
+  .scenario-card { flex-direction: column; gap: 4px; }
 }
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
