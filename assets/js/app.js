@@ -226,6 +226,12 @@
       return `<h2>${s.h}</h2>${(s.body || []).map(p => `<p>${p}</p>`).join("")}${scen ? `<div class="scenario">${scen}</div>` : ""}`;
     }).join("");
 
+    const sourcesHTML = (a.sources || []).length
+      ? `<div class="source-box"><div class="label">参考にした記事</div><ul>${
+          a.sources.map(s => `<li><a href="${s.url}" target="_blank" rel="noopener noreferrer">${s.title}</a><span class="pub">${s.publisher}</span></li>`).join("")
+        }</ul></div>`
+      : "";
+
     $("#article").innerHTML = `
       <span class="cat ${c.cls}">${c.label}</span>
       <h1>${a.title}</h1>
@@ -237,6 +243,7 @@
       ${sectionsHTML}
       ${a.memo ? `<div class="memo-box"><img class="memo-owl" src="assets/img/fx_icon.png?v=3" alt=""><div><b>ヨル教授メモ:</b> ${a.memo}</div></div>` : ""}
       <div class="tag-row">タグ: ${(a.tags || []).map(t => `<span class="pill">${t}</span>`).join("")}</div>
+      ${sourcesHTML}
       <div class="disclaimer-inline">当サイトの内容は情報提供を目的としたもので、特定の取引や売買タイミングを推奨するものではありません。投資の最終判断はご自身の責任でお願いします。</div>`;
   };
 
