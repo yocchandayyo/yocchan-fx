@@ -5,7 +5,7 @@
     technical: { label: "テクニカル入門", cls: "c-technical" },
     news:      { label: "経済ニュース",   cls: "c-news" }
   };
-  const AUTHOR = "よっちゃん(FX歴5年)";
+  const AUTHOR = "よっちゃん(FX歴8年)";
   const $ = (sel, el = document) => el.querySelector(sel);
 
   const fetchJSON = (path) => fetch(path).then(r => {
