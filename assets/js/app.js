@@ -90,9 +90,9 @@
       const d = (x) => x.toISOString().slice(0, 10);
       const range = `${d(start)}..${d(end)}`;
       const [usd, gbp, eur] = await Promise.all([
-        fetchJSON(`https://api.frankfurter.app/${range}?from=USD&to=JPY`),
-        fetchJSON(`https://api.frankfurter.app/${range}?from=GBP&to=USD,JPY`),
-        fetchJSON(`https://api.frankfurter.app/${range}?from=EUR&to=USD`)
+        fetchJSON(`https://api.frankfurter.dev/v1/${range}?from=USD&to=JPY`),
+        fetchJSON(`https://api.frankfurter.dev/v1/${range}?from=GBP&to=USD,JPY`),
+        fetchJSON(`https://api.frankfurter.dev/v1/${range}?from=EUR&to=USD`)
       ]);
       const series = (resp, sym) =>
         Object.keys(resp.rates).sort().map(k => resp.rates[k][sym]);
