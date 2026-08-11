@@ -1,36 +1,34 @@
 {
-  "range": "2026年8月3日(月)〜 8月7日(金)・時刻は日本時間",
+  "range": "2026年8月11日(火)〜 8月14日(金)・時刻は日本時間",
   "days": [
     {
-      "label": "8月3日(月)",
+      "label": "8月11日(火)",
       "items": [
-        { "time": "23:00", "flag": "US", "country": "米", "name": "ISM製造業景況指数(7月)", "prev": "48.5", "forecast": "49.0", "imp": "mid" }
+        { "time": "12:30", "flag": "AU", "country": "豪", "name": "RBA政策金利発表(結果:4.35%で据え置き)", "prev": "4.35%", "forecast": "4.35%", "imp": "lo" },
+        { "time": "23:00", "flag": "US", "country": "米", "name": "中古住宅販売件数(7月・年率)", "prev": "409万件", "forecast": "405万件", "imp": "lo" }
       ]
     },
     {
-      "label": "8月4日(火)",
+      "label": "8月12日(水)",
       "items": [
-        { "time": "10:30", "flag": "AU", "country": "豪", "name": "RBA政策金利発表", "prev": "3.85%", "forecast": "3.85%", "imp": "mid" }
+        { "time": "21:30", "flag": "US", "country": "米", "name": "消費者物価指数CPI(7月・前年比)", "prev": "+3.5%", "forecast": "+3.5%", "imp": "hi" },
+        { "time": "21:30", "flag": "US", "country": "米", "name": "コアCPI(7月・前年比)", "prev": "+2.6%", "forecast": "+2.5%", "imp": "hi" }
       ]
     },
     {
-      "label": "8月5日(水)",
+      "label": "8月13日(木)",
       "items": [
-        { "time": "21:15", "flag": "US", "country": "米", "name": "ADP雇用統計(7月)", "prev": "+15.0万人", "forecast": "+14.5万人", "imp": "mid" },
-        { "time": "23:00", "flag": "US", "country": "米", "name": "ISM非製造業景況指数(7月)", "prev": "51.6", "forecast": "51.2", "imp": "mid" }
+        { "time": "8:50", "flag": "JP", "country": "日", "name": "国内企業物価指数(7月・前年比)", "prev": "+7.1%", "forecast": "--", "imp": "mid" },
+        { "time": "15:00", "flag": "GB", "country": "英", "name": "4-6月期GDP速報(前期比)", "prev": "+0.6%", "forecast": "--", "imp": "mid" },
+        { "time": "21:30", "flag": "US", "country": "米", "name": "生産者物価指数PPI(7月・前月比)", "prev": "-0.3%", "forecast": "+0.2%", "imp": "mid" },
+        { "time": "21:30", "flag": "US", "country": "米", "name": "新規失業保険申請件数", "prev": "19.9万件", "forecast": "--", "imp": "lo" }
       ]
     },
     {
-      "label": "8月6日(木)",
+      "label": "8月14日(金)",
       "items": [
-        { "time": "20:00", "flag": "GB", "country": "英", "name": "BOE政策金利発表", "prev": "4.25%", "forecast": "4.00%", "imp": "hi" }
-      ]
-    },
-    {
-      "label": "8月7日(金)",
-      "items": [
-        { "time": "21:30", "flag": "US", "country": "米", "name": "雇用統計(7月)非農業部門雇用者数", "prev": "+18.2万人", "forecast": "+17.5万人", "imp": "hi" },
-        { "time": "21:30", "flag": "US", "country": "米", "name": "失業率(7月)", "prev": "4.1%", "forecast": "4.1%", "imp": "hi" }
+        { "time": "21:30", "flag": "US", "country": "米", "name": "小売売上高(7月・前月比)", "prev": "+0.2%", "forecast": "+0.3%", "imp": "hi" },
+        { "time": "23:00", "flag": "US", "country": "米", "name": "ミシガン大学消費者態度指数(速報値)", "prev": "55.2", "forecast": "52.5", "imp": "mid" }
       ]
     }
   ]
