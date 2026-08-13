@@ -258,6 +258,8 @@ img { max-width: 100%; display: block; }
   align-items: start;
   margin-bottom: 56px;
 }
+/* nowrapのリード文がmin-content幅を押し上げて右カラムを潰すのを防ぐ */
+.home-cols > * { min-width: 0; }
 .article-card {
   display: flex;
   gap: 16px;
