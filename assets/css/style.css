@@ -603,6 +603,33 @@ img { max-width: 100%; display: block; }
   flex-wrap: wrap;
 }
 .cal-chips { margin: 18px 0 14px; }
+.month-nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 18px 0 14px;
+}
+.month-nav #calMonth {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 700;
+  min-width: 7.5em;
+  text-align: center;
+}
+.month-nav button {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--primary);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  transition: all .15s;
+}
+.month-nav button:hover:not(:disabled) { border-color: var(--primary); background: var(--primary-soft); }
+.month-nav button:disabled { color: var(--line); cursor: default; }
 .legend { display: flex; gap: 16px; font-size: 12.5px; color: var(--muted); margin-bottom: 14px; }
 .legend .dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 5px; }
 .dot.hi { background: var(--down); }

@@ -1,6 +1,182 @@
 {
-  "range": "8月11日(火)〜 9月18日(金)・時刻は日本時間",
+  "range": "8月3日(月)〜 9月18日(金)・時刻は日本時間",
   "days": [
+    {
+      "date": "2026-08-03",
+      "label": "8月3日(月)",
+      "items": [
+        {
+          "time": "16:00",
+          "flag": "EU",
+          "country": "欧",
+          "name": "ユーロ圏 製造業PMI 改定値(7月)",
+          "prev": "51.4",
+          "forecast": "52.0",
+          "actual": "51.9",
+          "imp": "mid"
+        },
+        {
+          "time": "17:30",
+          "flag": "GB",
+          "country": "英",
+          "name": "英国 製造業PMI 改定値(7月)",
+          "prev": "52.5",
+          "forecast": "52.8",
+          "actual": "51.9",
+          "imp": "mid"
+        },
+        {
+          "time": "23:00",
+          "flag": "US",
+          "country": "米",
+          "name": "ISM製造業景況指数(7月)",
+          "prev": "53.3",
+          "forecast": "54.0",
+          "actual": "55.6",
+          "imp": "hi"
+        }
+      ]
+    },
+    {
+      "date": "2026-08-04",
+      "label": "8月4日(火)",
+      "items": [
+        {
+          "time": "21:30",
+          "flag": "US",
+          "country": "米",
+          "name": "貿易収支(6月)",
+          "prev": "-77.6B",
+          "forecast": "-73.0B",
+          "actual": "-73.3B",
+          "imp": "lo"
+        },
+        {
+          "time": "23:00",
+          "flag": "US",
+          "country": "米",
+          "name": "JOLTS求人件数(6月)",
+          "prev": "7.54M",
+          "forecast": "7.40M",
+          "actual": "7.36M",
+          "imp": "mid"
+        },
+        {
+          "time": "23:00",
+          "flag": "US",
+          "country": "米",
+          "name": "製造業受注(6月)",
+          "prev": "-1.3%",
+          "forecast": "+0.2%",
+          "actual": "-0.3%",
+          "imp": "lo"
+        }
+      ]
+    },
+    {
+      "date": "2026-08-05",
+      "label": "8月5日(水)",
+      "items": [
+        {
+          "time": "16:00",
+          "flag": "EU",
+          "country": "欧",
+          "name": "ユーロ圏 総合PMI 改定値(7月)",
+          "prev": "50.0",
+          "forecast": "51.9",
+          "actual": "52.0",
+          "imp": "mid"
+        },
+        {
+          "time": "17:30",
+          "flag": "GB",
+          "country": "英",
+          "name": "英国 サービス業PMI 改定値(7月)",
+          "prev": "48.8",
+          "forecast": "51.8",
+          "actual": "52.1",
+          "imp": "mid"
+        },
+        {
+          "time": "21:15",
+          "flag": "US",
+          "country": "米",
+          "name": "ADP民間雇用者数(7月)",
+          "prev": "9.5万人",
+          "forecast": "7.0万人",
+          "actual": "4.4万人",
+          "imp": "mid"
+        },
+        {
+          "time": "23:00",
+          "flag": "US",
+          "country": "米",
+          "name": "ISM非製造業(サービス業)景況指数(7月)",
+          "prev": "54.0",
+          "forecast": "54.5",
+          "actual": "54.1",
+          "imp": "hi"
+        }
+      ]
+    },
+    {
+      "date": "2026-08-06",
+      "label": "8月6日(木)",
+      "items": [
+        {
+          "time": "21:30",
+          "flag": "US",
+          "country": "米",
+          "name": "新規失業保険申請件数(8/1週)",
+          "prev": "19.8万件",
+          "forecast": "20.3万件",
+          "actual": "19.9万件",
+          "imp": "mid"
+        }
+      ]
+    },
+    {
+      "date": "2026-08-07",
+      "label": "8月7日(金)",
+      "items": [
+        {
+          "time": "21:30",
+          "flag": "US",
+          "country": "米",
+          "name": "非農業部門雇用者数(7月)",
+          "prev": "+2.0万人",
+          "forecast": "+8.3万人",
+          "actual": "-2.3万人",
+          "imp": "hi"
+        },
+        {
+          "time": "21:30",
+          "flag": "US",
+          "country": "米",
+          "name": "失業率(7月)",
+          "prev": "4.2%",
+          "forecast": "4.2%",
+          "actual": "4.1%",
+          "imp": "hi"
+        }
+      ]
+    },
+    {
+      "date": "2026-08-10",
+      "label": "8月10日(月)",
+      "items": [
+        {
+          "time": "23:00",
+          "flag": "US",
+          "country": "米",
+          "name": "CB雇用トレンド指数(7月)",
+          "prev": "106.74",
+          "forecast": "--",
+          "actual": "107.71",
+          "imp": "lo"
+        }
+      ]
+    },
     {
       "date": "2026-08-11",
       "label": "8月11日(火)",

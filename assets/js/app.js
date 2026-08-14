@@ -286,25 +286,46 @@
     }).join("");
 
     const empty = `<tr><td colspan="6" style="color:var(--muted);font-size:13.5px;padding:20px 16px;">
-        該当する指標がありません。</td></tr>`;
+        この条件に当てはまる指標はありません。</td></tr>`;
 
-    const draw = (key) => {
-      let days = cal.days;
-      if (key === "ahead") days = days.filter(d => !d.date || d.date >= today);
-      if (key === "hi") days = days
+    /* データに含まれる月(YYYY-MM)を古い順に。初期表示は今月、無ければ今日に一番近い月 */
+    const months = [...new Set(cal.days.map(d => d.date.slice(0, 7)))].sort();
+    const thisMonth = today.slice(0, 7);
+    let mi = months.indexOf(thisMonth);
+    if (mi < 0) mi = Math.max(0, months.findIndex(m => m >= thisMonth));
+    let hiOnly = false;
+
+    const monthLabel = (m) => `${Number(m.slice(0, 4))}年${Number(m.slice(5, 7))}月`;
+
+    const draw = () => {
+      const m = months[mi];
+      let days = cal.days.filter(d => d.date.slice(0, 7) === m);
+      const total = days.reduce((s, d) => s + d.items.length, 0);
+      if (hiOnly) days = days
         .map(d => ({ ...d, items: d.items.filter(it => it.imp === "hi") }))
         .filter(d => d.items.length);
+
       $("#calBody").innerHTML = dayRows(days) || empty;
+      $("#calMonth").textContent = monthLabel(m);
+      $("#calPrev").disabled = mi === 0;
+      $("#calNext").disabled = mi === months.length - 1;
+      $("#calRange").textContent =
+        `${monthLabel(m)}の主要指標 ${total}件・時刻はすべて日本時間です`;
+
       const mark = $("#calToday");
-      if (key === "all" && mark) mark.scrollIntoView({ block: "center", behavior: "smooth" });
+      if (mark) mark.scrollIntoView({ block: "center", behavior: "smooth" });
     };
 
-    const chips = document.querySelectorAll(".cal-chips button");
-    chips.forEach(btn => btn.addEventListener("click", () => {
-      chips.forEach(b => b.classList.toggle("on", b === btn));
-      draw(btn.dataset.cal);
-    }));
-    draw("ahead");
+    $("#calPrev").addEventListener("click", () => { if (mi > 0) { mi--; draw(); } });
+    $("#calNext").addEventListener("click", () => { if (mi < months.length - 1) { mi++; draw(); } });
+    const hiBtn = $("#calHiOnly");
+    hiBtn.addEventListener("click", () => {
+      hiOnly = !hiOnly;
+      hiBtn.classList.toggle("on", hiOnly);
+      hiBtn.setAttribute("aria-pressed", String(hiOnly));
+      draw();
+    });
+    draw();
   };
 
   /* ---------- boot ---------- */
