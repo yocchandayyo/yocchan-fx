@@ -8,7 +8,9 @@
   const AUTHOR = "よっちゃん(FX歴8年)";
   const $ = (sel, el = document) => el.querySelector(sel);
 
-  const fetchJSON = (path) => fetch(path).then(r => {
+  /* データは毎朝更新されるので、キャッシュを使う前に必ずサーバーへ確認しにいく。
+     変更がなければ304が返るだけなので通信量はほぼ増えない。 */
+  const fetchJSON = (path) => fetch(path, { cache: "no-cache" }).then(r => {
     if (!r.ok) throw new Error(path + " " + r.status);
     return r.json();
   });
