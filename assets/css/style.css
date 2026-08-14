@@ -303,10 +303,14 @@ img { max-width: 100%; display: block; }
 }
 .article-card .lead-line {
   font-size: 12.5px;
+  line-height: 1.6;
   color: var(--muted);
-  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
 }
 .article-card .date {
   flex: none;
