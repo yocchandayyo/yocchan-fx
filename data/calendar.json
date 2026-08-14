@@ -1,5 +1,5 @@
 {
-  "range": "8月11日(火)〜 9月11日(金)・時刻は日本時間",
+  "range": "8月11日(火)〜 9月18日(金)・時刻は日本時間",
   "days": [
     {
       "date": "2026-08-11",
@@ -421,6 +421,96 @@
           "prev": "--",
           "forecast": "--",
           "imp": "lo"
+        }
+      ]
+    },
+    {
+      "date": "2026-09-16",
+      "label": "9月16日(水)",
+      "items": [
+        {
+          "time": "21:30",
+          "flag": "US",
+          "country": "米",
+          "name": "小売売上高(8月分・前月比)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "hi"
+        }
+      ]
+    },
+    {
+      "date": "2026-09-17",
+      "label": "9月17日(木)",
+      "items": [
+        {
+          "time": "3:00",
+          "flag": "US",
+          "country": "米",
+          "name": "FOMC政策金利発表(9/15-16開催分)",
+          "prev": "3.50〜3.75%",
+          "forecast": "--",
+          "imp": "hi"
+        },
+        {
+          "time": "3:30",
+          "flag": "US",
+          "country": "米",
+          "name": "FOMC後 ウォーシュFRB議長 記者会見",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "hi"
+        },
+        {
+          "time": "20:00",
+          "flag": "GB",
+          "country": "英",
+          "name": "BOE政策金利発表(MPC結果・議事要旨)",
+          "prev": "3.75%(7/30会合・据え置き)",
+          "forecast": "--",
+          "imp": "hi"
+        },
+        {
+          "time": "21:30",
+          "flag": "US",
+          "country": "米",
+          "name": "フィラデルフィア連銀製造業景況指数(9月)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "mid"
+        },
+        {
+          "time": "21:30",
+          "flag": "US",
+          "country": "米",
+          "name": "新規失業保険申請件数(週間)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "mid"
+        }
+      ]
+    },
+    {
+      "date": "2026-09-18",
+      "label": "9月18日(金)",
+      "items": [
+        {
+          "time": "15:30",
+          "flag": "JP",
+          "country": "日",
+          "name": "日銀総裁 記者会見(通例の時刻)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "hi"
+        },
+        {
+          "time": "--",
+          "flag": "JP",
+          "country": "日",
+          "name": "日銀金融政策決定会合 結果発表(9/17-18開催分)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "hi"
         }
       ]
     }
