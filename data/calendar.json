@@ -779,6 +779,15 @@
       "label": "9月18日(金)",
       "items": [
         {
+          "time": "8:30",
+          "flag": "JP",
+          "country": "日",
+          "name": "全国消費者物価指数(8月分・生鮮食品除く総合・前年比)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "hi"
+        },
+        {
           "time": "15:30",
           "flag": "JP",
           "country": "日",
@@ -833,15 +842,6 @@
       "label": "9月23日(水)",
       "items": [
         {
-          "time": "--",
-          "flag": "JP",
-          "country": "日",
-          "name": "日本市場休場(秋分の日)",
-          "prev": "--",
-          "forecast": "--",
-          "imp": "lo"
-        },
-        {
           "time": "17:00",
           "flag": "EU",
           "country": "欧",
@@ -858,6 +858,15 @@
           "prev": "--",
           "forecast": "--",
           "imp": "mid"
+        },
+        {
+          "time": "--",
+          "flag": "JP",
+          "country": "日",
+          "name": "日本市場休場(秋分の日)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "lo"
         }
       ]
     },
@@ -866,7 +875,7 @@
       "label": "9月24日(木)",
       "items": [
         {
-          "time": "17:00",
+          "time": "17:30",
           "flag": "EU",
           "country": "欧",
           "name": "独ifo企業景況感指数(9月)",
@@ -899,15 +908,6 @@
       "label": "9月25日(金)",
       "items": [
         {
-          "time": "8:30",
-          "flag": "JP",
-          "country": "日",
-          "name": "東京都区部消費者物価指数(9月分・中旬速報値)",
-          "prev": "--",
-          "forecast": "--",
-          "imp": "mid"
-        },
-        {
           "time": "21:30",
           "flag": "US",
           "country": "米",
@@ -927,7 +927,7 @@
           "flag": "AU",
           "country": "豪",
           "name": "RBA政策金利発表(9/28-29開催分)",
-          "prev": "--",
+          "prev": "4.35%",
           "forecast": "--",
           "imp": "hi"
         },
@@ -946,6 +946,15 @@
       "date": "2026-09-30",
       "label": "9月30日(水)",
       "items": [
+        {
+          "time": "15:00",
+          "flag": "GB",
+          "country": "英",
+          "name": "4-6月期GDP確報(前期比)",
+          "prev": "+0.4%(1次推計)",
+          "forecast": "--",
+          "imp": "mid"
+        },
         {
           "time": "21:30",
           "flag": "US",
