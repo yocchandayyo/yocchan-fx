@@ -13,6 +13,13 @@
     return r.json();
   });
 
+  /* 端末のローカル日付を YYYY-MM-DD で返す(UTCずれを避けるため toISOString は使わない) */
+  const todayISO = () => {
+    const d = new Date();
+    const p = (n) => String(n).padStart(2, "0");
+    return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
+  };
+
   /* ---------- small SVG builders ---------- */
   const polyPoints = (values, w, h, pad = 3) => {
     const min = Math.min(...values), max = Math.max(...values);
@@ -163,7 +170,9 @@
 
     // 1日1件(重要度の高いもの)に絞り、「高」を優先しつつ時系列で3件表示
     const rank = { hi: 2, mid: 1, lo: 0 };
-    const perDay = cal.days
+    const today = todayISO();
+    const upcoming = cal.days.filter(d => !d.date || d.date >= today);
+    const perDay = (upcoming.length ? upcoming : cal.days)
       .filter(day => day.items.length)
       .map((day, idx) => {
         const best = [...day.items].sort((a, b) => rank[b.imp] - rank[a.imp])[0];
@@ -250,20 +259,50 @@
   const renderCalendar = async () => {
     const cal = await fetchJSON("data/calendar.json");
     $("#calRange").textContent = cal.range;
-    const rows = cal.days.map(day => {
-      const dayRow = `<tr class="day-row"><td colspan="6">${day.label}</td></tr>`;
-      const items = day.items.map(it => `
-        <tr class="${it.imp === "hi" ? "hot" : ""}">
+    const today = todayISO();
+
+    const dayRows = (days) => days.map(day => {
+      const state = !day.date ? "" : day.date < today ? "past" : day.date === today ? "today" : "";
+      const badge = state === "today" ? `<span class="today-badge">今日</span>` : "";
+      const dayRow = `<tr class="day-row ${state}"${state === "today" ? ' id="calToday"' : ""}>
+          <td colspan="6">${day.label}${badge}</td></tr>`;
+      const items = day.items.map(it => {
+        const actual = it.actual
+          ? `<td class="num actual">${it.actual}</td>`
+          : `<td class="num" style="color:var(--muted);">--</td>`;
+        return `
+        <tr class="${it.imp === "hi" ? "hot" : ""} ${state}">
           <td class="d" style="font-family:var(--font-data);font-size:12.5px;">${it.time}</td>
           <td><span class="flag">${it.flag}</span>${it.country}</td>
           <td><span class="bar ${it.imp}"></span><span class="ind">${it.name}</span></td>
           <td class="num prev">${it.prev}</td>
           <td class="num">${it.forecast}</td>
-          <td class="num" style="color:var(--muted);">--</td>
-        </tr>`).join("");
+          ${actual}
+        </tr>`;
+      }).join("");
       return dayRow + items;
     }).join("");
-    $("#calBody").innerHTML = rows;
+
+    const empty = `<tr><td colspan="6" style="color:var(--muted);font-size:13.5px;padding:20px 16px;">
+        該当する指標がありません。</td></tr>`;
+
+    const draw = (key) => {
+      let days = cal.days;
+      if (key === "ahead") days = days.filter(d => !d.date || d.date >= today);
+      if (key === "hi") days = days
+        .map(d => ({ ...d, items: d.items.filter(it => it.imp === "hi") }))
+        .filter(d => d.items.length);
+      $("#calBody").innerHTML = dayRows(days) || empty;
+      const mark = $("#calToday");
+      if (key === "all" && mark) mark.scrollIntoView({ block: "center", behavior: "smooth" });
+    };
+
+    const chips = document.querySelectorAll(".cal-chips button");
+    chips.forEach(btn => btn.addEventListener("click", () => {
+      chips.forEach(b => b.classList.toggle("on", b === btn));
+      draw(btn.dataset.cal);
+    }));
+    draw("ahead");
   };
 
   /* ---------- boot ---------- */

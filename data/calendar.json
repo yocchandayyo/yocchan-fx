@@ -1,34 +1,427 @@
 {
-  "range": "2026年8月11日(火)〜 8月14日(金)・時刻は日本時間",
+  "range": "8月11日(火)〜 9月11日(金)・時刻は日本時間",
   "days": [
     {
+      "date": "2026-08-11",
       "label": "8月11日(火)",
       "items": [
-        { "time": "12:30", "flag": "AU", "country": "豪", "name": "RBA政策金利発表(結果:4.35%で据え置き)", "prev": "4.35%", "forecast": "4.35%", "imp": "lo" },
-        { "time": "23:00", "flag": "US", "country": "米", "name": "中古住宅販売件数(7月・年率)", "prev": "409万件", "forecast": "405万件", "imp": "lo" }
+        {
+          "time": "12:30",
+          "flag": "AU",
+          "country": "豪",
+          "name": "RBA政策金利発表(結果:4.35%で据え置き)",
+          "prev": "4.35%",
+          "forecast": "4.35%",
+          "imp": "lo",
+          "actual": "4.35%"
+        },
+        {
+          "time": "23:00",
+          "flag": "US",
+          "country": "米",
+          "name": "中古住宅販売件数(7月・年率)",
+          "prev": "409万件",
+          "forecast": "405万件",
+          "imp": "lo"
+        }
       ]
     },
     {
+      "date": "2026-08-12",
       "label": "8月12日(水)",
       "items": [
-        { "time": "21:30", "flag": "US", "country": "米", "name": "消費者物価指数CPI(7月・前年比)", "prev": "+3.5%", "forecast": "+3.5%", "imp": "hi" },
-        { "time": "21:30", "flag": "US", "country": "米", "name": "コアCPI(7月・前年比)", "prev": "+2.6%", "forecast": "+2.5%", "imp": "hi" }
+        {
+          "time": "21:30",
+          "flag": "US",
+          "country": "米",
+          "name": "消費者物価指数CPI(7月・前年比)",
+          "prev": "+3.5%",
+          "forecast": "+3.5%",
+          "imp": "hi",
+          "actual": "+3.4%"
+        },
+        {
+          "time": "21:30",
+          "flag": "US",
+          "country": "米",
+          "name": "コアCPI(7月・前年比)",
+          "prev": "+2.6%",
+          "forecast": "+2.5%",
+          "imp": "hi",
+          "actual": "+2.5%"
+        }
       ]
     },
     {
+      "date": "2026-08-13",
       "label": "8月13日(木)",
       "items": [
-        { "time": "8:50", "flag": "JP", "country": "日", "name": "国内企業物価指数(7月・前年比)", "prev": "+7.1%", "forecast": "--", "imp": "mid" },
-        { "time": "15:00", "flag": "GB", "country": "英", "name": "4-6月期GDP速報(前期比)", "prev": "+0.6%", "forecast": "--", "imp": "mid" },
-        { "time": "21:30", "flag": "US", "country": "米", "name": "生産者物価指数PPI(7月・前月比)", "prev": "-0.3%", "forecast": "+0.2%", "imp": "mid" },
-        { "time": "21:30", "flag": "US", "country": "米", "name": "新規失業保険申請件数", "prev": "19.9万件", "forecast": "--", "imp": "lo" }
+        {
+          "time": "8:50",
+          "flag": "JP",
+          "country": "日",
+          "name": "国内企業物価指数(7月・前年比)",
+          "prev": "+7.1%",
+          "forecast": "--",
+          "imp": "mid"
+        },
+        {
+          "time": "15:00",
+          "flag": "GB",
+          "country": "英",
+          "name": "4-6月期GDP速報(前期比)",
+          "prev": "+0.6%",
+          "forecast": "--",
+          "imp": "mid"
+        },
+        {
+          "time": "21:30",
+          "flag": "US",
+          "country": "米",
+          "name": "生産者物価指数PPI(7月・前月比)",
+          "prev": "-0.3%",
+          "forecast": "+0.2%",
+          "imp": "mid"
+        },
+        {
+          "time": "21:30",
+          "flag": "US",
+          "country": "米",
+          "name": "新規失業保険申請件数",
+          "prev": "19.9万件",
+          "forecast": "--",
+          "imp": "lo"
+        }
       ]
     },
     {
+      "date": "2026-08-14",
       "label": "8月14日(金)",
       "items": [
-        { "time": "21:30", "flag": "US", "country": "米", "name": "小売売上高(7月・前月比)", "prev": "+0.2%", "forecast": "+0.3%", "imp": "hi" },
-        { "time": "23:00", "flag": "US", "country": "米", "name": "ミシガン大学消費者態度指数(速報値)", "prev": "55.2", "forecast": "52.5", "imp": "mid" }
+        {
+          "time": "21:30",
+          "flag": "US",
+          "country": "米",
+          "name": "小売売上高(7月・前月比)",
+          "prev": "+0.2%",
+          "forecast": "+0.3%",
+          "imp": "hi"
+        },
+        {
+          "time": "23:00",
+          "flag": "US",
+          "country": "米",
+          "name": "ミシガン大学消費者態度指数(速報値)",
+          "prev": "55.2",
+          "forecast": "52.5",
+          "imp": "mid"
+        }
+      ]
+    },
+    {
+      "date": "2026-08-17",
+      "label": "8月17日(月)",
+      "items": [
+        {
+          "time": "8:50",
+          "flag": "JP",
+          "country": "日",
+          "name": "4-6月期GDP速報(1次速報・前期比年率)",
+          "prev": "+1.8%(1-3月期改定値)",
+          "forecast": "--",
+          "imp": "hi"
+        }
+      ]
+    },
+    {
+      "date": "2026-08-18",
+      "label": "8月18日(火)",
+      "items": [
+        {
+          "time": "15:00",
+          "flag": "GB",
+          "country": "英",
+          "name": "雇用統計(失業率・賃金、7月分)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "mid"
+        },
+        {
+          "time": "18:05",
+          "flag": "EU",
+          "country": "欧",
+          "name": "独ZEW景況感指数(8月)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "mid"
+        }
+      ]
+    },
+    {
+      "date": "2026-08-19",
+      "label": "8月19日(水)",
+      "items": [
+        {
+          "time": "15:00",
+          "flag": "GB",
+          "country": "英",
+          "name": "消費者物価指数CPI(7月分・前年比)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "hi"
+        }
+      ]
+    },
+    {
+      "date": "2026-08-20",
+      "label": "8月20日(木)",
+      "items": [
+        {
+          "time": "21:30",
+          "flag": "US",
+          "country": "米",
+          "name": "新規失業保険申請件数(週間)",
+          "prev": "20.9万件(8/8週分)",
+          "forecast": "--",
+          "imp": "mid"
+        }
+      ]
+    },
+    {
+      "date": "2026-08-21",
+      "label": "8月21日(金)",
+      "items": [
+        {
+          "time": "8:30",
+          "flag": "JP",
+          "country": "日",
+          "name": "全国消費者物価指数(7月分・生鮮食品除く総合・前年比)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "hi"
+        }
+      ]
+    },
+    {
+      "date": "2026-08-25",
+      "label": "8月25日(火)",
+      "items": [
+        {
+          "time": "17:30",
+          "flag": "EU",
+          "country": "欧",
+          "name": "独ifo企業景況感指数(8月)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "mid"
+        },
+        {
+          "time": "23:00",
+          "flag": "US",
+          "country": "米",
+          "name": "コンファレンスボード消費者信頼感指数(8月)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "mid"
+        }
+      ]
+    },
+    {
+      "date": "2026-08-26",
+      "label": "8月26日(水)",
+      "items": [
+        {
+          "time": "21:30",
+          "flag": "US",
+          "country": "米",
+          "name": "PCEデフレータ(7月分・前年比)",
+          "prev": "+3.7%(6月分)",
+          "forecast": "--",
+          "imp": "hi"
+        }
+      ]
+    },
+    {
+      "date": "2026-08-27",
+      "label": "8月27日(木)",
+      "items": [
+        {
+          "time": "21:30",
+          "flag": "US",
+          "country": "米",
+          "name": "新規失業保険申請件数(週間)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "mid"
+        },
+        {
+          "time": "--",
+          "flag": "US",
+          "country": "米",
+          "name": "ジャクソンホール経済シンポジウム開幕(カンザスシティ連銀主催、〜8/29)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "hi"
+        }
+      ]
+    },
+    {
+      "date": "2026-08-28",
+      "label": "8月28日(金)",
+      "items": [
+        {
+          "time": "23:00",
+          "flag": "US",
+          "country": "米",
+          "name": "FRB議長 ジャクソンホール講演(ウォーシュ議長)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "hi"
+        },
+        {
+          "time": "23:00",
+          "flag": "US",
+          "country": "米",
+          "name": "ミシガン大学消費者態度指数(確報・8月)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "lo"
+        }
+      ]
+    },
+    {
+      "date": "2026-08-31",
+      "label": "8月31日(月)",
+      "items": [
+        {
+          "time": "18:00",
+          "flag": "EU",
+          "country": "欧",
+          "name": "ユーロ圏消費者物価指数(HICP速報値・8月・前年比)",
+          "prev": "+2.9%(7月速報値)",
+          "forecast": "--",
+          "imp": "hi"
+        }
+      ]
+    },
+    {
+      "date": "2026-09-01",
+      "label": "9月1日(火)",
+      "items": [
+        {
+          "time": "23:00",
+          "flag": "US",
+          "country": "米",
+          "name": "ISM製造業景況指数(8月)",
+          "prev": "55.6",
+          "forecast": "--",
+          "imp": "hi"
+        }
+      ]
+    },
+    {
+      "date": "2026-09-03",
+      "label": "9月3日(木)",
+      "items": [
+        {
+          "time": "21:30",
+          "flag": "US",
+          "country": "米",
+          "name": "新規失業保険申請件数(週間)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "mid"
+        },
+        {
+          "time": "23:00",
+          "flag": "US",
+          "country": "米",
+          "name": "ISM非製造業(サービス業)景況指数(8月)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "mid"
+        }
+      ]
+    },
+    {
+      "date": "2026-09-04",
+      "label": "9月4日(金)",
+      "items": [
+        {
+          "time": "21:30",
+          "flag": "US",
+          "country": "米",
+          "name": "雇用統計(非農業部門雇用者数・失業率、8月分)",
+          "prev": "-2.3万人/失業率4.1%(7月分)",
+          "forecast": "--",
+          "imp": "hi"
+        }
+      ]
+    },
+    {
+      "date": "2026-09-10",
+      "label": "9月10日(木)",
+      "items": [
+        {
+          "time": "21:15",
+          "flag": "EU",
+          "country": "欧",
+          "name": "ECB理事会 政策金利発表・総裁記者会見",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "hi"
+        },
+        {
+          "time": "21:30",
+          "flag": "US",
+          "country": "米",
+          "name": "PPI(8月分・前月比)",
+          "prev": "0.0%(コア+0.4%、7月分)",
+          "forecast": "--",
+          "imp": "mid"
+        },
+        {
+          "time": "21:30",
+          "flag": "US",
+          "country": "米",
+          "name": "新規失業保険申請件数(週間)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "mid"
+        }
+      ]
+    },
+    {
+      "date": "2026-09-11",
+      "label": "9月11日(金)",
+      "items": [
+        {
+          "time": "15:00",
+          "flag": "GB",
+          "country": "英",
+          "name": "月次GDP(7月分・前月比)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "mid"
+        },
+        {
+          "time": "21:30",
+          "flag": "US",
+          "country": "米",
+          "name": "消費者物価指数CPI(8月分・総合/コア前年比)",
+          "prev": "総合+3.4%/コア+2.5%(7月分)",
+          "forecast": "--",
+          "imp": "hi"
+        },
+        {
+          "time": "23:00",
+          "flag": "US",
+          "country": "米",
+          "name": "ミシガン大学消費者態度指数(速報・9月)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "lo"
+        }
       ]
     }
   ]

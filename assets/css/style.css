@@ -595,6 +595,14 @@ img { max-width: 100%; display: block; }
 /* ============================================================
    Calendar page
    ============================================================ */
+.cal-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.cal-chips { margin: 18px 0 14px; }
 .legend { display: flex; gap: 16px; font-size: 12.5px; color: var(--muted); margin-bottom: 14px; }
 .legend .dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 5px; }
 .dot.hi { background: var(--down); }
@@ -628,10 +636,28 @@ img { max-width: 100%; display: block; }
   font-size: 13px;
   padding: 7px 16px;
 }
+.cal-table .day-row.today td {
+  background: var(--primary);
+  color: #fff;
+}
+.cal-table .today-badge {
+  display: inline-block;
+  margin-left: 10px;
+  padding: 1px 9px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, .22);
+  font-size: 11px;
+  font-weight: 700;
+  vertical-align: 1px;
+}
+.cal-table .day-row.past td { background: var(--bg); color: var(--muted); }
+.cal-table tr.past .ind, .cal-table tr.past .d { color: var(--muted); }
+.cal-table td.actual { color: var(--ink); font-weight: 700; }
 .cal-table .flag { font-family: var(--font-data); font-size: 11px; color: var(--muted); margin-right: 6px; }
 .cal-table .ind { font-weight: 500; }
 .cal-table tr.hot td { background: #FDF3F3; }
 .cal-table tr.hot .ind { font-weight: 700; }
+.cal-table tr.hot.past td { background: var(--surface); }
 .cal-table .bar {
   display: inline-block;
   width: 3px;
