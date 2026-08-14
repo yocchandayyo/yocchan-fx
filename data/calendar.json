@@ -1,5 +1,5 @@
 {
-  "range": "8月3日(月)〜 9月18日(金)・時刻は日本時間",
+  "range": "8月3日(月)〜 9月30日(水)・時刻は日本時間",
   "days": [
     {
       "date": "2026-08-03",
@@ -496,6 +496,30 @@
       ]
     },
     {
+      "date": "2026-09-02",
+      "label": "9月2日(水)",
+      "items": [
+        {
+          "time": "21:15",
+          "flag": "US",
+          "country": "米",
+          "name": "ADP民間雇用者数(8月)",
+          "prev": "4.4万人",
+          "forecast": "--",
+          "imp": "mid"
+        },
+        {
+          "time": "23:00",
+          "flag": "US",
+          "country": "米",
+          "name": "製造業受注(7月)",
+          "prev": "-0.3%",
+          "forecast": "--",
+          "imp": "lo"
+        }
+      ]
+    },
+    {
       "date": "2026-09-03",
       "label": "9月3日(木)",
       "items": [
@@ -531,6 +555,51 @@
           "prev": "-2.3万人/失業率4.1%(7月分)",
           "forecast": "--",
           "imp": "hi"
+        }
+      ]
+    },
+    {
+      "date": "2026-09-07",
+      "label": "9月7日(月)",
+      "items": [
+        {
+          "time": "--",
+          "flag": "US",
+          "country": "米",
+          "name": "米国市場休場(レイバーデー)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "lo"
+        }
+      ]
+    },
+    {
+      "date": "2026-09-08",
+      "label": "9月8日(火)",
+      "items": [
+        {
+          "time": "8:50",
+          "flag": "JP",
+          "country": "日",
+          "name": "4-6月期GDP改定値(2次速報・前期比年率)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "hi"
+        }
+      ]
+    },
+    {
+      "date": "2026-09-09",
+      "label": "9月9日(水)",
+      "items": [
+        {
+          "time": "10:30",
+          "flag": "CN",
+          "country": "中",
+          "name": "中国 消費者物価指数(8月分・前年比)",
+          "prev": "+0.5%",
+          "forecast": "--",
+          "imp": "mid"
         }
       ]
     },
@@ -594,6 +663,45 @@
           "flag": "US",
           "country": "米",
           "name": "ミシガン大学消費者態度指数(速報・9月)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "lo"
+        }
+      ]
+    },
+    {
+      "date": "2026-09-14",
+      "label": "9月14日(月)",
+      "items": [
+        {
+          "time": "13:30",
+          "flag": "JP",
+          "country": "日",
+          "name": "鉱工業生産確報(7月分)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "mid"
+        }
+      ]
+    },
+    {
+      "date": "2026-09-15",
+      "label": "9月15日(火)",
+      "items": [
+        {
+          "time": "21:30",
+          "flag": "US",
+          "country": "米",
+          "name": "NY連銀製造業景気指数(9月)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "mid"
+        },
+        {
+          "time": "--",
+          "flag": "US",
+          "country": "米",
+          "name": "FOMC会合開幕(9/15-16開催、結果は9/17未明3:00に発表)",
           "prev": "--",
           "forecast": "--",
           "imp": "lo"
@@ -684,6 +792,174 @@
           "flag": "JP",
           "country": "日",
           "name": "日銀金融政策決定会合 結果発表(9/17-18開催分)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "hi"
+        }
+      ]
+    },
+    {
+      "date": "2026-09-21",
+      "label": "9月21日(月)",
+      "items": [
+        {
+          "time": "--",
+          "flag": "JP",
+          "country": "日",
+          "name": "日本市場休場(敬老の日)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "lo"
+        }
+      ]
+    },
+    {
+      "date": "2026-09-22",
+      "label": "9月22日(火)",
+      "items": [
+        {
+          "time": "--",
+          "flag": "JP",
+          "country": "日",
+          "name": "日本市場休場(国民の休日)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "lo"
+        }
+      ]
+    },
+    {
+      "date": "2026-09-23",
+      "label": "9月23日(水)",
+      "items": [
+        {
+          "time": "--",
+          "flag": "JP",
+          "country": "日",
+          "name": "日本市場休場(秋分の日)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "lo"
+        },
+        {
+          "time": "17:00",
+          "flag": "EU",
+          "country": "欧",
+          "name": "ユーロ圏 総合PMI速報値(9月)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "mid"
+        },
+        {
+          "time": "17:30",
+          "flag": "GB",
+          "country": "英",
+          "name": "英国 総合PMI速報値(9月)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "mid"
+        }
+      ]
+    },
+    {
+      "date": "2026-09-24",
+      "label": "9月24日(木)",
+      "items": [
+        {
+          "time": "17:00",
+          "flag": "EU",
+          "country": "欧",
+          "name": "独ifo企業景況感指数(9月)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "mid"
+        },
+        {
+          "time": "21:30",
+          "flag": "US",
+          "country": "米",
+          "name": "新規失業保険申請件数(週間)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "mid"
+        },
+        {
+          "time": "23:00",
+          "flag": "US",
+          "country": "米",
+          "name": "新築住宅販売件数(8月・年率)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "mid"
+        }
+      ]
+    },
+    {
+      "date": "2026-09-25",
+      "label": "9月25日(金)",
+      "items": [
+        {
+          "time": "8:30",
+          "flag": "JP",
+          "country": "日",
+          "name": "東京都区部消費者物価指数(9月分・中旬速報値)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "mid"
+        },
+        {
+          "time": "21:30",
+          "flag": "US",
+          "country": "米",
+          "name": "耐久財受注(8月・前月比)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "hi"
+        }
+      ]
+    },
+    {
+      "date": "2026-09-29",
+      "label": "9月29日(火)",
+      "items": [
+        {
+          "time": "13:30",
+          "flag": "AU",
+          "country": "豪",
+          "name": "RBA政策金利発表(9/28-29開催分)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "hi"
+        },
+        {
+          "time": "23:00",
+          "flag": "US",
+          "country": "米",
+          "name": "コンファレンスボード消費者信頼感指数(9月)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "mid"
+        }
+      ]
+    },
+    {
+      "date": "2026-09-30",
+      "label": "9月30日(水)",
+      "items": [
+        {
+          "time": "21:30",
+          "flag": "US",
+          "country": "米",
+          "name": "PCEデフレータ(8月分・前年比)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "hi"
+        },
+        {
+          "time": "21:30",
+          "flag": "US",
+          "country": "米",
+          "name": "4-6月期GDP確報(第3次改定値・前期比年率)",
           "prev": "--",
           "forecast": "--",
           "imp": "hi"
