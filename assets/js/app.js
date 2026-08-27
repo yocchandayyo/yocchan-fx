@@ -110,40 +110,16 @@
   };
 
   const loadRates = async () => {
-    const local = await fetchJSON("data/rates.json");
-    renderRates(local.pairs);
+    const data = await fetchJSON("data/rates.json");
+    renderRates(data.pairs);
     const note = $("#rateNote");
-    if (note) note.textContent = `レートは1日1回更新の参考値です(${local.updated}時点)`;
-    try {
-      const end = new Date();
-      const start = new Date(end.getTime() - 30 * 864e5);
-      const d = (x) => x.toISOString().slice(0, 10);
-      const range = `${d(start)}..${d(end)}`;
-      const [usd, gbp, eur] = await Promise.all([
-        fetchJSON(`https://api.frankfurter.dev/v1/${range}?from=USD&to=JPY`),
-        fetchJSON(`https://api.frankfurter.dev/v1/${range}?from=GBP&to=USD,JPY`),
-        fetchJSON(`https://api.frankfurter.dev/v1/${range}?from=EUR&to=USD`)
-      ]);
-      const series = (resp, sym) =>
-        Object.keys(resp.rates).sort().map(k => resp.rates[k][sym]);
-      const build = (pair, resp, sym) => {
-        const h = series(resp, sym);
-        const price = h[h.length - 1];
-        const prev = h[h.length - 2] || price;
-        return { pair, price, changePct: ((price - prev) / prev) * 100, history: h.slice(-15) };
-      };
-      const live = [
-        build("USD/JPY", usd, "JPY"),
-        build("GBP/USD", gbp, "USD"),
-        build("EUR/USD", eur, "USD"),
-        build("GBP/JPY", gbp, "JPY")
-      ];
-      renderRates(live);
-      const last = Object.keys(usd.rates).sort().pop();
-      if (note) note.textContent = `欧州中央銀行の参考レート(${last}時点)・1日1回更新`;
-    } catch (e) {
-      /* offline or API unavailable — keep local fallback */
-    }
+    if (!note) return;
+    const when = data.updatedAt || data.updated;
+    /* 日中足はYahoo側にCORSが無いのでブラウザからは取り直せない。
+       tools/update_rates.py が焼き込んだ値をそのまま出す */
+    note.textContent = data.source === "ecb"
+      ? `欧州中央銀行の参考レート(${when}時点)・1日1回更新`
+      : `15分足の参考値(${when} JST時点)。リアルタイムではありません`;
   };
 
   /* ---------- article renderers ---------- */
