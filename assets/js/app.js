@@ -56,6 +56,10 @@
       <polyline class="${animate ? "draw" : ""}" points="${pts}"></polyline></svg>`;
   };
 
+  const HERO_SHAPE = [3, 2.7, 3.3, 3.0, 3.7, 3.4, 4.2, 3.9, 4.5, 4.2, 5.0, 4.7, 5.3];
+  /* 記事ヒーローの線は装飾。せめて本文の方向とは食い違わせない */
+  const heroShape = (dir) => dir === "down" ? HERO_SHAPE.slice().reverse() : HERO_SHAPE;
+
   const heroChartSVG = (values) => {
     const pts = polyPoints(values, 300, 110, 4);
     return `<svg class="chart" viewBox="0 0 300 110" preserveAspectRatio="none" aria-hidden="true">
@@ -241,7 +245,7 @@
       const chg = a.hero.change || "";
       const dir = chg.startsWith("-") || chg.startsWith("−") ? "down" : "up";
       heroHTML = `<div class="hero-chart">
-        ${heroChartSVG([3, 2.7, 3.3, 3.0, 3.7, 3.4, 4.2, 3.9, 4.5, 4.2, 5.0, 4.7, 5.3])}
+        ${heroChartSVG(heroShape(dir))}
         <span class="eyebrow">${a.hero.label || a.hero.pair}</span>
         <span class="big">${a.hero.price}<span class="chg-inline ${dir}">${chg}</span></span>
       </div>`;
