@@ -27,8 +27,11 @@
      景表法のステマ規制に合わせて、必ず「PR」表記とリスク注記を一緒に出す。 */
   const TCS_AC = "C142787";
   const ADS = {
-    dmm:    { lc: "DMM2", isq: 55, alt: "DMM FX 口座開設" },
-    gaitame:{ lc: "NJT2", isq: 74, alt: "外為オンライン 口座開設" }
+    dmm:     { lc: "DMM2",  isq: 55,  alt: "DMM FX 口座開設" },
+    gaitame: { lc: "NJT2",  isq: 74,  alt: "外為オンライン 口座開設" },
+    matsui:  { lc: "MTI2",  isq: 205, alt: "松井証券 FX口座開設" },
+    broadnet:{ lc: "FXTS1", isq: 79,  alt: "FXブロードネット 口座開設" },
+    hirose:  { lc: "HIR99", isq: 48,  alt: "ヒロセ通商 LION FX 口座開設" }
   };
   const adTag = (a) =>
     `<a href="https://www.tcs-asp.net/alink?AC=${TCS_AC}&LC=${a.lc}&SQ=0&isq=${a.isq}" target="_blank" rel="nofollow sponsored noopener">` +
@@ -250,7 +253,7 @@
       <p class="lead-para">${a.leadPara}</p>
       ${sectionsHTML}
       ${a.memo ? `<div class="memo-box"><img class="memo-owl" src="assets/img/fx_icon.png?v=3" alt=""><div><b>ヨル教授メモ:</b> ${a.memo}</div></div>` : ""}
-      ${adBox(["gaitame", "dmm"], "FX口座の開設はこちら")}
+      ${adBox(["gaitame", "dmm", "matsui", "broadnet"], "FX口座の開設はこちら")}
       <div class="tag-row">タグ: ${(a.tags || []).map(t => `<span class="pill">${t}</span>`).join("")}</div>
       ${sourcesHTML}
       <div class="disclaimer-inline">当サイトの内容は情報提供を目的としたもので、特定の取引や売買タイミングを推奨するものではありません。投資の最終判断はご自身の責任でお願いします。</div>`;
@@ -332,7 +335,7 @@
     if (page === "home") {
       loadRates(); renderHome();
       const side = $("#adSidebar");
-      if (side) side.innerHTML = adBox(["dmm"], "FX口座を開くなら");
+      if (side) side.innerHTML = adBox(["dmm", "matsui"], "FX口座を開くなら");
     }
     if (page === "list") renderList();
     if (page === "article") renderArticle();
