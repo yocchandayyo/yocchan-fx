@@ -31,7 +31,10 @@
     gaitame: { lc: "NJT2",  isq: 74,  alt: "外為オンライン 口座開設" },
     matsui:  { lc: "MTI2",  isq: 205, alt: "松井証券 FX口座開設" },
     broadnet:{ lc: "FXTS1", isq: 79,  alt: "FXブロードネット 口座開設" },
-    hirose:  { lc: "HIR99", isq: 48,  alt: "ヒロセ通商 LION FX 口座開設" }
+    hirose:  { lc: "HIR99", isq: 48,  alt: "ヒロセ通商 LION FX 口座開設" },
+    invast:  { lc: "INV12", isq: 222, alt: "トライオートFX 口座開設" },
+    himawari:{ lc: "HIM99", isq: 60,  alt: "ひまわりFX 口座開設" },
+    jfx:     { lc: "JFX1",  isq: 200, alt: "JFX MATRIX TRADER 口座開設" }
   };
   const adTag = (a) =>
     `<a href="https://www.tcs-asp.net/alink?AC=${TCS_AC}&LC=${a.lc}&SQ=0&isq=${a.isq}" target="_blank" rel="nofollow sponsored noopener">` +
@@ -253,7 +256,7 @@
       <p class="lead-para">${a.leadPara}</p>
       ${sectionsHTML}
       ${a.memo ? `<div class="memo-box"><img class="memo-owl" src="assets/img/fx_icon.png?v=3" alt=""><div><b>ヨル教授メモ:</b> ${a.memo}</div></div>` : ""}
-      ${adBox(["gaitame", "dmm", "matsui", "broadnet"], "FX口座の開設はこちら")}
+      ${adBox(["dmm", "invast", "gaitame", "broadnet", "himawari", "matsui", "jfx", "hirose"], "FX口座の開設はこちら")}
       <div class="tag-row">タグ: ${(a.tags || []).map(t => `<span class="pill">${t}</span>`).join("")}</div>
       ${sourcesHTML}
       <div class="disclaimer-inline">当サイトの内容は情報提供を目的としたもので、特定の取引や売買タイミングを推奨するものではありません。投資の最終判断はご自身の責任でお願いします。</div>`;
@@ -335,7 +338,7 @@
     if (page === "home") {
       loadRates(); renderHome();
       const side = $("#adSidebar");
-      if (side) side.innerHTML = adBox(["dmm", "matsui"], "FX口座を開くなら");
+      if (side) side.innerHTML = adBox(["dmm", "invast", "matsui"], "FX口座を開くなら");
     }
     if (page === "list") renderList();
     if (page === "article") renderArticle();
