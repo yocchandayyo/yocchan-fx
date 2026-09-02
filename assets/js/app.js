@@ -40,9 +40,10 @@
     `<a href="https://www.tcs-asp.net/alink?AC=${TCS_AC}&LC=${a.lc}&SQ=0&isq=${a.isq}" target="_blank" rel="nofollow sponsored noopener">` +
     `<img src="https://img.tcs-asp.net/imagesender?ac=${TCS_AC}&lc=${a.lc}&isq=${a.isq}&psq=0" width="300" height="250" alt="${a.alt}" loading="lazy"></a>`;
   const AD_NOTE = "FXは証拠金取引のため、相場の変動により預けた証拠金を上回る損失が出ることがあります。各社のリスク説明を確認のうえ、ご自身の判断でお申し込みください。";
-  const adBox = (keys, title) =>
+  const adBox = (keys, title, more) =>
     `<div class="ad-box"><div class="ad-head"><span class="ad-pr">PR</span>${title}</div>` +
     `<div class="ad-grid">${keys.map(k => adTag(ADS[k])).join("")}</div>` +
+    (more ? `<p class="ad-more"><a href="brokers.html">FX会社8社の比較を見る →</a></p>` : "") +
     `<p class="ad-note">${AD_NOTE}</p></div>`;
 
   /* ---------- small SVG builders ---------- */
@@ -256,7 +257,7 @@
       <p class="lead-para">${a.leadPara}</p>
       ${sectionsHTML}
       ${a.memo ? `<div class="memo-box"><img class="memo-owl" src="assets/img/fx_icon.png?v=3" alt=""><div><b>ヨル教授メモ:</b> ${a.memo}</div></div>` : ""}
-      ${adBox(["dmm", "invast", "gaitame", "broadnet", "himawari", "matsui", "jfx", "hirose"], "FX口座の開設はこちら")}
+      ${adBox(["dmm", "invast"], "FX口座の開設はこちら", true)}
       <div class="tag-row">タグ: ${(a.tags || []).map(t => `<span class="pill">${t}</span>`).join("")}</div>
       ${sourcesHTML}
       <div class="disclaimer-inline">当サイトの内容は情報提供を目的としたもので、特定の取引や売買タイミングを推奨するものではありません。投資の最終判断はご自身の責任でお願いします。</div>`;
@@ -338,7 +339,7 @@
     if (page === "home") {
       loadRates(); renderHome();
       const side = $("#adSidebar");
-      if (side) side.innerHTML = adBox(["dmm", "invast", "matsui"], "FX口座を開くなら");
+      if (side) side.innerHTML = adBox(["dmm", "invast"], "FX口座を開くなら", true);
     }
     if (page === "list") renderList();
     if (page === "article") renderArticle();
