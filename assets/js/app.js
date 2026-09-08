@@ -6,7 +6,17 @@
     news:      { label: "経済ニュース",   cls: "c-news" }
   };
   const AUTHOR = "よっちゃん(FX歴8年)";
+  const IMP_LABEL = { hi: "高", mid: "中", lo: "低" };
   const $ = (sel, el = document) => el.querySelector(sel);
+
+  /* 記事のタグ/タイトル/leadから通貨ペアを推定する。判定できなければドル円扱い */
+  const detectPair = (a) => {
+    const text = `${(a.tags || []).join(" ")} ${a.title || ""} ${a.lead || ""}`;
+    if (/ポンドドル|GBP\/USD|GBPUSD/.test(text)) return "GBP/USD";
+    if (/ユーロ|EUR\/USD|EURUSD/.test(text)) return "EUR/USD";
+    if (/ポンド円|GBP\/JPY|GBPJPY/.test(text)) return "GBP/JPY";
+    return "USD/JPY";
+  };
 
   /* データは毎朝更新されるので、キャッシュを使う前に必ずサーバーへ確認しにいく。
      変更がなければ304が返るだけなので通信量はほぼ増えない。 */
@@ -70,6 +80,52 @@
       <polyline class="${animate ? "draw" : ""}" points="${pts}"></polyline></svg>`;
   };
 
+  /* ---------- 今朝の一本: 実データのミニチャート ---------- */
+  /* rates.jsonのupdatedAtは "YYYY-MM-DD HH:MM"(JST)。15分足の各インデックスの時刻をJSTで逆算する */
+  const chartTimeAt = (updatedAt, idx, len) => {
+    const [datePart, timePart] = String(updatedAt || "").split(" ");
+    if (!datePart || !timePart) return "";
+    const end = new Date(`${datePart}T${timePart}:00+09:00`);
+    if (Number.isNaN(end.getTime())) return "";
+    const t = new Date(end.getTime() - (len - 1 - idx) * 15 * 60000);
+    return `${String(t.getHours()).padStart(2, "0")}:${String(t.getMinutes()).padStart(2, "0")}`;
+  };
+
+  const frontChartSVG = (values) => {
+    const w = 300, h = 100, pad = 4;
+    const min = Math.min(...values), max = Math.max(...values);
+    const span = (max - min) || 1;
+    const linePts = values.map((v, i) => {
+      const x = pad + (i / (values.length - 1)) * (w - pad * 2);
+      const y = h - pad - ((v - min) / span) * (h - pad * 2);
+      return `${x.toFixed(1)},${y.toFixed(1)}`;
+    }).join(" ");
+    const areaPts = `${pad},${h - pad} ${linePts} ${w - pad},${h - pad}`;
+    return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" aria-hidden="true">
+      <polyline class="area" points="${areaPts}"></polyline>
+      <polyline class="line" points="${linePts}"></polyline></svg>`;
+  };
+
+  /* pair/rateInfo(rates.jsonの1件)/updatedAtから「今朝の一本」右カラムのチャートパネルを組む。
+     データが無ければ空文字を返し、呼び出し側でパネルごと非表示にする */
+  const frontChartHTML = (pair, info, updatedAt) => {
+    if (!info || !Array.isArray(info.history) || info.history.length < 2) return "";
+    const hist = info.history;
+    const dir = info.changePct > 0.005 ? "up" : info.changePct < -0.005 ? "down" : "flat";
+    const arrow = dir === "up" ? "▲" : dir === "down" ? "▼" : "―";
+    const min = Math.min(...hist), max = Math.max(...hist);
+    const tStart = chartTimeAt(updatedAt, 0, hist.length);
+    const tMid = chartTimeAt(updatedAt, Math.floor((hist.length - 1) / 2), hist.length);
+    const tEnd = chartTimeAt(updatedAt, hist.length - 1, hist.length);
+    return `<div class="front-chart">
+      <span class="front-badge ${dir}">${pair} ${fmtPrice(pair, info.price)} ${arrow}${Math.abs(info.changePct).toFixed(2)}%</span>
+      ${frontChartSVG(hist)}
+      <div class="front-chart-hilo"><span>高値 ${fmtPrice(pair, max)}</span><span>安値 ${fmtPrice(pair, min)}</span></div>
+      <div class="front-chart-times"><span>${tStart}</span><span>${tMid}</span><span>${tEnd}</span></div>
+      <p class="front-chart-caption">15分足・直近15時間・参考値</p>
+    </div>`;
+  };
+
   const HERO_SHAPE = [3, 2.7, 3.3, 3.0, 3.7, 3.4, 4.2, 3.9, 4.5, 4.2, 5.0, 4.7, 5.3];
   /* 記事ヒーローの線は装飾。せめて本文の方向とは食い違わせない */
   const heroShape = (dir) => dir === "down" ? HERO_SHAPE.slice().reverse() : HERO_SHAPE;
@@ -114,6 +170,21 @@
       .filter(a => (a.category === "analysis" || a.category === "news") && a.date >= start && a.date <= end)
       .sort((a, b) => a.date.localeCompare(b.date));
     return candidates[0] || null;
+  };
+  /* 指標名の末尾の月表記「(8月)」「（8月）」を除いて、同じ指標かどうかを比較できるようにする */
+  const stripIndicatorMonth = (name) => String(name || "").replace(/[（(][^）)]*[）)]\s*$/, "").trim();
+  /* 指標名(月表記抜き) → 直近の過去発表日(day)、のマップを作る。
+     「これからの指標」の行から「前回発表時のログを見る」を辿るために使う */
+  const buildPastByName = (days, today) => {
+    const map = {};
+    days.forEach(day => {
+      if (!day.date || day.date >= today) return;
+      day.items.forEach(it => {
+        const key = stripIndicatorMonth(it.name);
+        if (!map[key] || day.date > map[key].date) map[key] = day;
+      });
+    });
+    return map;
   };
   const fmtFullDate = (iso) => {
     const [y, m, d] = iso.split("-").map(Number);
@@ -194,21 +265,30 @@
   };
 
   const renderHome = async () => {
-    const [articles, cal] = await Promise.all([
+    const [articles, cal, ratesData] = await Promise.all([
       fetchJSON("data/articles.json"),
-      fetchJSON("data/calendar.json")
+      fetchJSON("data/calendar.json"),
+      fetchJSON("data/rates.json").catch(() => null)
     ]);
     const featured = articles.find(a => a.featured) || articles[0];
     const rest = articles.filter(a => a.id !== featured.id);
 
     const fc = CAT[featured.category];
-    const fh = featured.hero || {};
-    $("#featured").innerHTML = `
-      <span class="eyebrow">今朝の一本 · ${fc.label}</span>
-      <h2>${featured.title}</h2>
-      <p>${featured.lead}</p>
-      <span class="more">続きを読む →</span>`;
-    $("#featured").href = `post/${featured.id}.html`;
+    const pair = detectPair(featured);
+    const rateInfo = ratesData && Array.isArray(ratesData.pairs)
+      ? ratesData.pairs.find(p => p.pair === pair)
+      : null;
+    const chartHTML = frontChartHTML(pair, rateInfo, ratesData && ratesData.updatedAt);
+    const featuredEl = $("#featured");
+    featuredEl.classList.toggle("no-chart", !chartHTML);
+    featuredEl.innerHTML = `
+      <div class="front-main">
+        <span class="eyebrow">今朝の一本 · ${fc.label}</span>
+        <a class="front-title" href="post/${featured.id}.html"><h2>${featured.title}</h2></a>
+        <p>${featured.lead}</p>
+        <a class="more" href="post/${featured.id}.html">続きを読む →</a>
+      </div>
+      ${chartHTML}`;
 
     const marketArticles = rest.filter(a => a.category === "analysis" || a.category === "news").slice(0, 6);
     const basicsArticles = rest.filter(a => a.category === "technical").slice(0, 6);
@@ -235,21 +315,25 @@
       .sort((a, b) => (rank[b.imp] - rank[a.imp]) || (a.idx - b.idx))
       .slice(0, 3)
       .sort((a, b) => a.idx - b.idx);
-    const impLabel = { hi: "高", mid: "中", lo: "低" };
     const shortDay = (label) => {
       const m = label.match(/(\d+)月(\d+)日\((.)\)/);
       return m ? `${m[1]}/${m[2]} ${m[3]}` : label;
     };
+    const pastByName = buildPastByName(cal.days, today);
     $("#weekCal").innerHTML = picked.map(x => {
       let linkRow = "";
       if (x.date && x.date < today && x.imp === "hi") {
         const art = findMorningArticle(x, articles);
         if (art) linkRow = `<tr><td colspan="3" class="cal-mini-link"><a href="post/${art.id}.html">→ 翌朝の相場観を読む</a></td></tr>`;
+      } else if (x.date && x.date >= today) {
+        const pastDay = pastByName[stripIndicatorMonth(x.name)];
+        const art = pastDay && findMorningArticle(pastDay, articles);
+        if (art) linkRow = `<tr><td colspan="3" class="cal-mini-link"><a href="post/${art.id}.html">前回発表時のログを見る →</a></td></tr>`;
       }
       return `<tr>
         <td class="d">${shortDay(x.label)}</td>
         <td>${x.country} ${x.name}</td>
-        <td class="imp ${x.imp}">${impLabel[x.imp]}</td></tr>${linkRow}`;
+        <td class="imp-cell"><span class="imp ${x.imp}">${IMP_LABEL[x.imp]}</span></td></tr>${linkRow}`;
     }).join("");
   };
 
@@ -349,6 +433,7 @@
     ]);
     $("#calRange").textContent = cal.range;
     const today = todayISO();
+    const pastByName = buildPastByName(cal.days, today);
 
     const dayRows = (days) => days.map(day => {
       const state = !day.date ? "" : day.date < today ? "past" : day.date === today ? "today" : "";
@@ -364,11 +449,17 @@
         const actual = it.actual
           ? `<td class="num actual">${it.actual}</td>`
           : `<td class="num" style="color:var(--muted);">--</td>`;
+        let prevLog = "";
+        if (state !== "past") {
+          const pastDay = pastByName[stripIndicatorMonth(it.name)];
+          const art = pastDay && findMorningArticle(pastDay, articles);
+          if (art) prevLog = `<a class="cal-prev-log" href="post/${art.id}.html">前回発表時のログを見る →</a>`;
+        }
         return `
         <tr class="${it.imp === "hi" ? "hot" : ""} ${state}">
-          <td class="d" style="font-family:var(--font-data);font-size:12.5px;">${it.time}</td>
+          <td class="d">${it.time}</td>
           <td><span class="flag">${it.flag}</span>${it.country}</td>
-          <td><span class="bar ${it.imp}"></span><span class="ind">${it.name}</span></td>
+          <td class="ind-td"><span class="imp ${it.imp}">${IMP_LABEL[it.imp]}</span><span class="ind">${it.name}</span>${prevLog}</td>
           <td class="num prev">${it.prev}</td>
           <td class="num">${it.forecast}</td>
           ${actual}

@@ -25,7 +25,7 @@ AUTHOR = "よっちゃん(FX歴8年)"
 GA_ID = "G-M79V6CNK6L"
 ADSENSE_CLIENT = "ca-pub-6679576726407478"
 TCS_AC = "C142787"
-CSS_VER = "19"
+CSS_VER = "20"
 
 CAT = {
     "analysis": ("相場分析", "c-analysis"),
@@ -110,8 +110,9 @@ def header_footer(active_cat=None):
   <div class="wrap">
     <a class="brand" href="/" aria-label="よっちゃんのFX ホーム">
       <img class="avatar" src="/assets/img/fx_icon.png?v=3" alt="">
-      <span>よっちゃんのFX<small>YOCCHAN'S FX</small></span>
+      <span>よっちゃんのFX</span>
     </a>
+    <span class="stance">デイトレ歴8年。ドル円・ポンドドルを中心に、毎朝の相場観を淡々と記録する個人メディア</span>
     <nav class="global-nav" aria-label="グローバルナビゲーション">
       <a href="/">ホーム</a>
       <a href="/articles.html?cat=market"{market_cls}>相場観</a>
