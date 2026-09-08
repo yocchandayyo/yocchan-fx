@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>リズムキープ | 昼夜逆転を防ぐ生活リズム記録アプリ</title>
+<meta name="description" content="起床・就寝時刻を毎日記録して、昼夜逆転を防ぐためのシンプルな生活リズム管理アプリ。データはブラウザ内にのみ保存されます。">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@700;900&family=Noto+Sans+JP:wght@400;500;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #12142B;
+    --bg-soft: #1B1E3D;
+    --surface: #232752;
+    --surface-2: #2B2F63;
+    --ink: #F2F3FA;
+    --muted: #A6ABD6;
+    --line: #35396B;
+    --primary: #7C8CFF;
+    --primary-soft: #2A2D63;
+    --sun: #FFB258;
+    --sun-soft: #4A3A24;
+    --good: #34D399;
+    --good-soft: #123B31;
+    --warn: #FBBF24;
+    --warn-soft: #3D3417;
+    --bad: #F87171;
+    --bad-soft: #3D1E22;
+    --radius: 16px;
+    --shadow: 0 1px 2px rgba(0,0,0,.2), 0 10px 30px rgba(0,0,0,.25);
+    --font-display: "Zen Kaku Gothic New", "Noto Sans JP", sans-serif;
+    --font-body: "Noto Sans JP", sans-serif;
+    --font-data: "IBM Plex Mono", "Consolas", monospace;
+    --maxw: 720px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: radial-gradient(circle at 20% -10%, #262a5c 0%, var(--bg) 55%);
+    color: var(--ink);
+    font-family: var(--font-body);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    padding-bottom: 60px;
+  }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 18px; }
+
+  header.hero {
+    padding: 36px 0 24px;
+    text-align: center;
+  }
+  header.hero h1 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 26px;
+    letter-spacing: .02em;
+  }
+  header.hero h1 span {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    font-family: var(--font-body);
+    margin-top: 6px;
+    letter-spacing: normal;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .card h2 {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+  .card h2 .ico { font-size: 17px; }
+
+  /* Streak */
+  .streak-card { text-align: center; padding: 26px 20px; }
+  .streak-num {
+    font-family: var(--font-data);
+    font-size: 46px;
+    font-weight: 600;
+    color: var(--sun);
+    line-height: 1;
+  }
+  .streak-num small { font-size: 16px; color: var(--muted); font-family: var(--font-body); margin-left: 4px; }
+  .streak-msg { margin-top: 10px; font-size: 13.5px; color: var(--muted); }
+
+  /* Form rows */
+  .row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+  .field { flex: 1; min-width: 140px; }
+  .field label { display: block; font-size: 12.5px; color: var(--muted); margin-bottom: 6px; }
+  input[type="time"] {
+    width: 100%;
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 10px 12px;
+    color: var(--ink);
+    font-family: var(--font-data);
+    font-size: 16px;
+  }
+  input[type="time"]:focus { outline: 2px solid var(--primary); outline-offset: 1px; }
+  input[type="number"] {
+    width: 90px;
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 10px 12px;
+    color: var(--ink);
+    font-family: var(--font-data);
+    font-size: 15px;
+  }
+
+  button.primary {
+    background: var(--primary);
+    color: #0D1030;
+    border: none;
+    border-radius: 10px;
+    padding: 11px 18px;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    font-family: var(--font-body);
+  }
+  button.primary:hover { filter: brightness(1.08); }
+  button.ghost {
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 8px 14px;
+    font-size: 13px;
+    cursor: pointer;
+    font-family: var(--font-body);
+  }
+
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12.5px;
+    font-weight: 700;
+    padding: 5px 10px;
+    border-radius: 999px;
+    margin-top: 4px;
+  }
+  .status-good { background: var(--good-soft); color: var(--good); }
+  .status-warn { background: var(--warn-soft); color: var(--warn); }
+  .status-bad { background: var(--bad-soft); color: var(--bad); }
+  .status-none { background: var(--surface-2); color: var(--muted); }
+
+  /* Checklist */
+  .checklist { display: flex; flex-direction: column; gap: 10px; }
+  .check-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 10px 12px;
+    cursor: pointer;
+    font-size: 14px;
+    user-select: none;
+  }
+  .check-item input { width: 18px; height: 18px; accent-color: var(--good); flex: none; }
+  .check-item.checked { border-color: var(--good); background: var(--good-soft); }
+
+  /* Week grid */
+  .week-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+  }
+  .day-cell {
+    border-radius: 10px;
+    padding: 10px 4px;
+    text-align: center;
+    border: 1px solid var(--line);
+    background: var(--bg-soft);
+  }
+  .day-cell .dow { font-size: 11px; color: var(--muted); }
+  .day-cell .date { font-size: 12px; font-weight: 700; margin: 2px 0 6px; }
+  .day-cell .time { font-family: var(--font-data); font-size: 12px; }
+  .day-cell.good { border-color: var(--good); background: var(--good-soft); }
+  .day-cell.warn { border-color: var(--warn); background: var(--warn-soft); }
+  .day-cell.bad { border-color: var(--bad); background: var(--bad-soft); }
+  .day-cell.today { box-shadow: 0 0 0 2px var(--primary) inset; }
+
+  /* Tips */
+  .tips { display: flex; flex-direction: column; gap: 10px; }
+  .tip {
+    display: flex;
+    gap: 10px;
+    font-size: 13.5px;
+    color: var(--ink);
+  }
+  .tip .ico { flex: none; font-size: 16px; }
+  .tip b { color: var(--sun); }
+
+  footer.note {
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 28px;
+    padding: 0 20px;
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <h1>🌗 リズムキープ<span>起床時刻を記録して、昼夜逆転を防ぐ</span></h1>
+</header>
+
+<main class="wrap">
+
+  <section class="card streak-card">
+    <div class="streak-num" id="streakNum">0<small>日</small></div>
+    <div class="streak-msg" id="streakMsg">まずは今日の起床時刻を記録しよう</div>
+  </section>
+
+  <section class="card">
+    <h2><span class="ico">⏰</span>今日の記録</h2>
+    <div class="row">
+      <div class="field">
+        <label for="wakeInput">今日の起床時刻</label>
+        <input type="time" id="wakeInput">
+      </div>
+      <div class="field">
+        <label for="sleepInput">昨夜の就寝時刻</label>
+        <input type="time" id="sleepInput">
+      </div>
+    </div>
+    <div id="statusPillWrap"></div>
+    <div class="row" style="margin-top:14px;">
+      <button class="primary" id="saveBtn">記録する</button>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="ico">✅</span>今日の習慣チェック</h2>
+    <div class="checklist" id="checklist"></div>
+  </section>
+
+  <section class="card">
+    <h2><span class="ico">📅</span>直近7日間</h2>
+    <div class="week-grid" id="weekGrid"></div>
+  </section>
+
+  <section class="card">
+    <h2><span class="ico">⚙️</span>目標設定</h2>
+    <div class="row">
+      <div class="field">
+        <label for="targetWakeInput">目標の起床時刻</label>
+        <input type="time" id="targetWakeInput">
+      </div>
+      <div class="field">
+        <label for="allowedDriftInput">許容ズレ（分）</label>
+        <input type="number" id="allowedDriftInput" min="0" max="180" step="5">
+      </div>
+    </div>
+    <button class="ghost" id="resetBtn">全データをリセット</button>
+  </section>
+
+  <section class="card">
+    <h2><span class="ico">💡</span>昼夜逆転を防ぐコツ</h2>
+    <div class="tips">
+      <div class="tip"><span class="ico">☀️</span><span>前の夜どんなに遅くても、<b>起床時刻は毎日そろえる</b>のが最優先。眠るのは早くなくていい。</span></div>
+      <div class="tip"><span class="ico">🪟</span><span>起きたらすぐ<b>太陽光やカーテンを開けて光を浴びる</b>。体内時計が朝と認識してリセットされる。</span></div>
+      <div class="tip"><span class="ico">📵</span><span>就寝3時間前からは<b>スマホ・PCの強い光を控える</b>。メラトニンの分泌を妨げない。</span></div>
+      <div class="tip"><span class="ico">😴</span><span>眠くても<b>昼寝は15〜20分まで</b>。長い昼寝は夜の入眠を遅らせる。</span></div>
+      <div class="tip"><span class="ico">☕</span><span>就寝の6時間前を過ぎたら<b>カフェインを摂らない</b>。</span></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="note">
+  データはこの端末のブラウザ内にのみ保存されます（サーバーへの送信なし）。ブラウザのデータを消去すると記録も消えます。
+</footer>
+
+<script>
+(function () {
+  var STORAGE_KEY = 'rhythmkeep:v1';
+  var HABITS = [
+    { id: 'sunlight', label: '起きてすぐ日光を浴びた' },
+    { id: 'noNap', label: '昼寝は20分以内だった' },
+    { id: 'noScreen', label: '就寝3時間前はスマホを控えた' },
+    { id: 'noCaffeine', label: '就寝6時間前からカフェインを控えた' }
+  ];
+
+  function defaultState() {
+    return {
+      targetWake: '07:00',
+      allowedDrift: 60,
+      logs: {}
+    };
+  }
+
+  function loadState() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return defaultState();
+      var parsed = JSON.parse(raw);
+      var base = defaultState();
+      return Object.assign(base, parsed, { logs: parsed.logs || {} });
+    } catch (e) {
+      return defaultState();
+    }
+  }
+
+  function saveState() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    } catch (e) { /* storage unavailable, ignore */ }
+  }
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+
+  function dateKey(d) {
+    return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+  }
+
+  function toMinutes(hhmm) {
+    if (!hhmm) return null;
+    var parts = hhmm.split(':');
+    return parseInt(parts[0], 10) * 60 + parseInt(parts[1], 10);
+  }
+
+  function statusFor(entry) {
+    if (!entry || !entry.wake) return 'none';
+    var target = toMinutes(state.targetWake);
+    var actual = toMinutes(entry.wake);
+    var diff = actual - target;
+    if (diff < 0) diff = 0; // waking earlier than target is never penalized
+    var allowed = state.allowedDrift;
+    if (diff <= allowed) return 'good';
+    if (diff <= allowed + 120) return 'warn';
+    return 'bad';
+  }
+
+  function entryFor(key) {
+    return state.logs[key];
+  }
+
+  function ensureEntry(key) {
+    if (!state.logs[key]) state.logs[key] = { wake: null, sleep: null, habits: {} };
+    return state.logs[key];
+  }
+
+  var state = loadState();
+  var today = new Date();
+  var todayKey = dateKey(today);
+
+  // ---- elements ----
+  var wakeInput = document.getElementById('wakeInput');
+  var sleepInput = document.getElementById('sleepInput');
+  var saveBtn = document.getElementById('saveBtn');
+  var statusPillWrap = document.getElementById('statusPillWrap');
+  var checklistEl = document.getElementById('checklist');
+  var weekGridEl = document.getElementById('weekGrid');
+  var streakNumEl = document.getElementById('streakNum');
+  var streakMsgEl = document.getElementById('streakMsg');
+  var targetWakeInput = document.getElementById('targetWakeInput');
+  var allowedDriftInput = document.getElementById('allowedDriftInput');
+  var resetBtn = document.getElementById('resetBtn');
+
+  function renderStatusPill() {
+    var entry = entryFor(todayKey);
+    var st = statusFor(entry);
+    var labels = {
+      good: '目標どおり◎', warn: '少しズレています', bad: '昼夜逆転気味です', none: '未記録'
+    };
+    statusPillWrap.innerHTML = '<span class="status-pill status-' + st + '">' + labels[st] + '</span>';
+  }
+
+  function renderChecklist() {
+    var entry = ensureEntry(todayKey);
+    checklistEl.innerHTML = '';
+    HABITS.forEach(function (h) {
+      var checked = !!entry.habits[h.id];
+      var wrapper = document.createElement('label');
+      wrapper.className = 'check-item' + (checked ? ' checked' : '');
+      wrapper.innerHTML = '<input type="checkbox" data-id="' + h.id + '"' + (checked ? ' checked' : '') + '><span>' + h.label + '</span>';
+      checklistEl.appendChild(wrapper);
+    });
+    checklistEl.querySelectorAll('input[type="checkbox"]').forEach(function (cb) {
+      cb.addEventListener('change', function () {
+        var e = ensureEntry(todayKey);
+        e.habits[cb.getAttribute('data-id')] = cb.checked;
+        saveState();
+        renderChecklist();
+      });
+    });
+  }
+
+  function computeStreak() {
+    var count = 0;
+    var cursor = new Date(today);
+    // if today isn't logged yet, start counting from yesterday
+    if (!entryFor(todayKey) || !entryFor(todayKey).wake) {
+      cursor.setDate(cursor.getDate() - 1);
+    }
+    while (true) {
+      var key = dateKey(cursor);
+      var entry = entryFor(key);
+      if (statusFor(entry) === 'good') {
+        count++;
+        cursor.setDate(cursor.getDate() - 1);
+      } else {
+        break;
+      }
+    }
+    return count;
+  }
+
+  function renderStreak() {
+    var n = computeStreak();
+    streakNumEl.innerHTML = n + '<small>日</small>';
+    var msgs = [
+      'まずは今日の起床時刻を記録しよう',
+      'いい調子！明日も同じ時間に起きよう',
+      '体内時計が整ってきています',
+      'このリズムを崩さずキープ！'
+    ];
+    if (n === 0) streakMsgEl.textContent = msgs[0];
+    else if (n < 3) streakMsgEl.textContent = msgs[1];
+    else if (n < 7) streakMsgEl.textContent = msgs[2];
+    else streakMsgEl.textContent = msgs[3];
+  }
+
+  var DOW = ['日', '月', '火', '水', '木', '金', '土'];
+
+  function renderWeek() {
+    weekGridEl.innerHTML = '';
+    for (var i = 6; i >= 0; i--) {
+      var d = new Date(today);
+      d.setDate(d.getDate() - i);
+      var key = dateKey(d);
+      var entry = entryFor(key);
+      var st = statusFor(entry);
+      var cell = document.createElement('div');
+      cell.className = 'day-cell ' + st + (key === todayKey ? ' today' : '');
+      var timeLabel = entry && entry.wake ? entry.wake : '-';
+      cell.innerHTML =
+        '<div class="dow">' + DOW[d.getDay()] + '</div>' +
+        '<div class="date">' + (d.getMonth() + 1) + '/' + d.getDate() + '</div>' +
+        '<div class="time">' + timeLabel + '</div>';
+      weekGridEl.appendChild(cell);
+    }
+  }
+
+  function renderAll() {
+    renderStatusPill();
+    renderChecklist();
+    renderWeek();
+    renderStreak();
+  }
+
+  // ---- init form values ----
+  targetWakeInput.value = state.targetWake;
+  allowedDriftInput.value = state.allowedDrift;
+  var existingToday = entryFor(todayKey);
+  if (existingToday) {
+    wakeInput.value = existingToday.wake || '';
+    sleepInput.value = existingToday.sleep || '';
+  }
+
+  saveBtn.addEventListener('click', function () {
+    if (!wakeInput.value) {
+      wakeInput.focus();
+      return;
+    }
+    var entry = ensureEntry(todayKey);
+    entry.wake = wakeInput.value;
+    entry.sleep = sleepInput.value || null;
+    saveState();
+    renderAll();
+  });
+
+  targetWakeInput.addEventListener('change', function () {
+    state.targetWake = targetWakeInput.value || '07:00';
+    saveState();
+    renderAll();
+  });
+
+  allowedDriftInput.addEventListener('change', function () {
+    var v = parseInt(allowedDriftInput.value, 10);
+    state.allowedDrift = isNaN(v) ? 60 : Math.max(0, Math.min(180, v));
+    allowedDriftInput.value = state.allowedDrift;
+    saveState();
+    renderAll();
+  });
+
+  resetBtn.addEventListener('click', function () {
+    if (!confirm('すべての記録を削除します。よろしいですか？')) return;
+    state = defaultState();
+    saveState();
+    wakeInput.value = '';
+    sleepInput.value = '';
+    targetWakeInput.value = state.targetWake;
+    allowedDriftInput.value = state.allowedDrift;
+    renderAll();
+  });
+
+  renderAll();
+})();
+</script>
+
+</body>
+</html>
