@@ -44,6 +44,7 @@
     `<div class="ad-box"><div class="ad-head"><span class="ad-pr">PR</span>${title}</div>` +
     `<div class="ad-grid">${keys.map(k => adTag(ADS[k])).join("")}</div>` +
     `<p class="ad-more"><a href="https://www.tcs-asp.net/alink?AC=${TCS_AC}&LC=SBI50&SQ=0&isq=1" target="_blank" rel="nofollow sponsored noopener">1通貨から練習するなら SBI FXトレード →</a></p>` +
+    `<p class="ad-more"><a href="https://www.tradingview.com/?aff_id=170482" target="_blank" rel="nofollow sponsored noopener">チャート分析に使っている TradingView →</a></p>` +
     (more ? `<p class="ad-more"><a href="brokers.html">FX会社9社の比較を見る →</a></p>` : "") +
     `<p class="ad-note">${AD_NOTE}</p></div>`;
 
