@@ -134,7 +134,7 @@
   /* ---------- article renderers ---------- */
   const cardHTML = (a) => {
     const c = CAT[a.category];
-    return `<a class="article-card" href="article.html?id=${a.id}">
+    return `<a class="article-card" href="post/${a.id}.html">
       <span class="thumb">${thumbSVG(a.thumb)}</span>
       <span class="meta">
         <span class="cat ${c.cls}">${c.label}</span>
@@ -166,14 +166,14 @@
         <p>${featured.lead}</p>
         <div>${(featured.tags || []).map(t => `<span class="pill" style="font-size:12px;background:var(--primary-soft);color:var(--primary);padding:3px 12px;border-radius:99px;margin-right:6px;">${t}</span>`).join("")}</div>
       </div>`;
-    $("#featured").href = `article.html?id=${featured.id}`;
+    $("#featured").href = `post/${featured.id}.html`;
 
     $("#latestList").innerHTML = rest.slice(0, 3).map(cardHTML).join("");
 
     const popularIds = ["2026-07-29-order-types", "2026-07-31-rsi-basics", "2026-08-02-moving-average"];
     $("#popularList").innerHTML = popularIds
       .map(id => articles.find(a => a.id === id)).filter(Boolean)
-      .map((a, i) => `<li><span class="num">${i + 1}</span><a href="article.html?id=${a.id}">${a.title}</a></li>`)
+      .map((a, i) => `<li><span class="num">${i + 1}</span><a href="post/${a.id}.html">${a.title}</a></li>`)
       .join("");
 
     // 1日1件(重要度の高いもの)に絞り、「高」を優先しつつ時系列で3件表示
@@ -224,6 +224,7 @@
     const a = articles.find(x => x.id === id) || articles[0];
     const c = CAT[a.category];
     document.title = `${a.title} | よっちゃんのFX`;
+    const canon = document.createElement("link"); canon.rel = "canonical"; canon.href = `https://yocchan-fx.com/post/${a.id}.html`; document.head.appendChild(canon);
 
     let heroHTML = "";
     if (a.hero) {

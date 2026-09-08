@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://yocchan-fx.com/sitemap.xml
