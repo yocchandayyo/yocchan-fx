@@ -25,7 +25,7 @@ AUTHOR = "よっちゃん(FX歴8年)"
 GA_ID = "G-M79V6CNK6L"
 ADSENSE_CLIENT = "ca-pub-6679576726407478"
 TCS_AC = "C142787"
-CSS_VER = "12"
+CSS_VER = "18"
 
 CAT = {
     "analysis": ("相場分析", "c-analysis"),
@@ -33,7 +33,7 @@ CAT = {
     "news": ("経済ニュース", "c-news"),
 }
 
-FONTS = ("https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@700;900"
+FONTS = ("https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@700;900"
          "&family=Noto+Sans+JP:wght@400;500;700&family=IBM+Plex+Mono:wght@500;600&display=swap")
 
 

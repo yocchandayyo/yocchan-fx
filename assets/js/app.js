@@ -131,6 +131,28 @@
       : `15分足の参考値(${when} JST時点)。リアルタイムではありません`;
   };
 
+
+  /* ---------- 夜明けバンドの時計: FXの24時間(6:00起点)と「いま」 ---------- */
+  const renderClock = () => {
+    const marker = $("#nowMarker"), label = $("#nowLabel"), date = $("#mastDate");
+    if (!marker) return;
+    const tick = () => {
+      const d = new Date();
+      const mins = (d.getHours() * 60 + d.getMinutes() - 6 * 60 + 1440) % 1440;
+      const pct = mins / 1440 * 100;
+      marker.style.left = `${pct}%`;
+      label.style.left = `${pct}%`;
+      label.textContent = `いま ${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}`;
+      if (date) {
+        const w = "日月火水木金土"[d.getDay()];
+        date.textContent = `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日(${w})`;
+      }
+    };
+    /* 最初は左端から「いま」まで動かす(reduced-motionではCSS側で即時) */
+    tick();
+    setInterval(tick, 60 * 1000);
+  };
+
   /* ---------- article renderers ---------- */
   const cardHTML = (a) => {
     const c = CAT[a.category];
@@ -156,16 +178,10 @@
     const fc = CAT[featured.category];
     const fh = featured.hero || {};
     $("#featured").innerHTML = `
-      <div class="visual">
-        <span class="eyebrow">FEATURED · ${fc.label}</span>
-        <span class="big">${fh.pair || ""} ${fh.price || ""}</span>
-      </div>
-      <div class="body">
-        <span class="cat ${fc.cls}">${fc.label}</span>
-        <h2>${featured.title}</h2>
-        <p>${featured.lead}</p>
-        <div>${(featured.tags || []).map(t => `<span class="pill" style="font-size:12px;background:var(--primary-soft);color:var(--primary);padding:3px 12px;border-radius:99px;margin-right:6px;">${t}</span>`).join("")}</div>
-      </div>`;
+      <span class="eyebrow">今朝の一本 · ${fc.label}</span>
+      <h2>${featured.title}</h2>
+      <p>${featured.lead}</p>
+      <span class="more">続きを読む →</span>`;
     $("#featured").href = `post/${featured.id}.html`;
 
     $("#latestList").innerHTML = rest.slice(0, 3).map(cardHTML).join("");
@@ -340,7 +356,7 @@
   document.addEventListener("DOMContentLoaded", () => {
     const page = document.body.dataset.page;
     if (page === "home") {
-      loadRates(); renderHome();
+      loadRates(); renderHome(); renderClock();
       const side = $("#adSidebar");
       if (side) side.innerHTML = adBox(["matsui", "hirose"], "FX口座を開くなら", true);
     }

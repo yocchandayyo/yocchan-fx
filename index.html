@@ -17,7 +17,7 @@
 <meta name="description" content="デイトレ歴8年のよっちゃんが、ドル円・ポンドドルを中心に毎朝の相場観とFXの基礎をやさしく届ける個人メディア。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@700;900&family=Noto+Sans+JP:wght@400;500;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@600;700;800family=Zen+Kaku+Gothic+New:wght@700;900&family=Noto+Sans+JPfamily=Zen+Kaku+Gothic+New:wght@700;900family=Zen+Kaku+Gothic+New:wght@700;900&family=Noto+Sans+JPfamily=Noto+Sans+JP:wght@400;500;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <meta property="og:title" content="よっちゃんのFX | 毎朝の相場観">
 <meta property="og:description" content="デイトレ歴8年のよっちゃんが、ドル円・ポンドドルの相場観を毎朝届けます。">
 <meta property="og:type" content="website">
@@ -25,7 +25,7 @@
 <meta property="og:url" content="https://yocchan-fx.com/">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/png" href="assets/img/fx_icon.png?v=3">
-<link rel="stylesheet" href="assets/css/style.css?v=17">
+<link rel="stylesheet" href="assets/css/style.css?v=18">
 </head>
 <body data-page="home">
 
@@ -46,14 +46,29 @@
   </div>
 </header>
 
-<main class="wrap">
-  <section aria-label="本日のレート">
+<section class="dawn" aria-label="今朝の相場">
+  <div class="inner wrap">
+    <div class="dateline"><b id="mastDate">&nbsp;</b><span>今朝の版</span><span>ドル円とポンドドルの相場観</span></div>
+
+    <div class="clock" aria-label="FX市場の24時間と現在時刻">
+      <div class="track">
+        <span class="tick" style="left:0"></span><span class="lbl start" style="left:0;transform:none">NYクローズ 6:00</span>
+        <span class="tick" style="left:12.5%"></span><span class="lbl" style="left:12.5%">東京 9:00</span>
+        <span class="tick" style="left:41.7%"></span><span class="lbl mid" style="left:41.7%">ロンドン 16:00</span>
+        <span class="tick" style="left:64.6%"></span><span class="lbl" style="left:64.6%">NY 21:30</span>
+        <span class="tick" style="left:100%"></span><span class="lbl" style="left:100%;transform:translateX(-100%)">翌6:00</span>
+        <span class="now-lbl" id="nowLabel"></span><span class="now" id="nowMarker" aria-hidden="true"></span>
+      </div>
+    </div>
+
     <div class="rate-board" id="rateBoard"></div>
     <p class="rate-note" id="rateNote"></p>
-  </section>
 
-  <a class="featured" id="featured" href="#" aria-label="注目記事"></a>
+    <a class="front" id="featured" href="#" aria-label="今朝の相場観"></a>
+  </div>
+</section>
 
+<main class="wrap">
   <div class="home-cols">
     <section aria-label="新着記事">
       <h2 class="sec-title">新着記事</h2>
@@ -101,6 +116,6 @@
   </div>
 </footer>
 
-<script src="assets/js/app.js?v=17"></script>
+<script src="assets/js/app.js?v=18"></script>
 </body>
 </html>
