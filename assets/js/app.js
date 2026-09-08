@@ -43,7 +43,8 @@
   const adBox = (keys, title, more) =>
     `<div class="ad-box"><div class="ad-head"><span class="ad-pr">PR</span>${title}</div>` +
     `<div class="ad-grid">${keys.map(k => adTag(ADS[k])).join("")}</div>` +
-    (more ? `<p class="ad-more"><a href="brokers.html">FX会社8社の比較を見る →</a></p>` : "") +
+    `<p class="ad-more"><a href="https://www.tcs-asp.net/alink?AC=${TCS_AC}&LC=SBI50&SQ=0&isq=1" target="_blank" rel="nofollow sponsored noopener">1通貨から練習するなら SBI FXトレード →</a></p>` +
+    (more ? `<p class="ad-more"><a href="brokers.html">FX会社9社の比較を見る →</a></p>` : "") +
     `<p class="ad-note">${AD_NOTE}</p></div>`;
 
   /* ---------- small SVG builders ---------- */
@@ -257,7 +258,7 @@
       <p class="lead-para">${a.leadPara}</p>
       ${sectionsHTML}
       ${a.memo ? `<div class="memo-box"><img class="memo-owl" src="assets/img/fx_icon.png?v=3" alt=""><div><b>ヨル教授メモ:</b> ${a.memo}</div></div>` : ""}
-      ${adBox(["dmm", "invast"], "FX口座の開設はこちら", true)}
+      ${adBox(["matsui", "hirose"], "FX口座の開設はこちら", true)}
       <div class="tag-row">タグ: ${(a.tags || []).map(t => `<span class="pill">${t}</span>`).join("")}</div>
       ${sourcesHTML}
       <div class="disclaimer-inline">当サイトの内容は情報提供を目的としたもので、特定の取引や売買タイミングを推奨するものではありません。投資の最終判断はご自身の責任でお願いします。</div>`;
@@ -339,7 +340,7 @@
     if (page === "home") {
       loadRates(); renderHome();
       const side = $("#adSidebar");
-      if (side) side.innerHTML = adBox(["dmm", "invast"], "FX口座を開くなら", true);
+      if (side) side.innerHTML = adBox(["matsui", "hirose"], "FX口座を開くなら", true);
     }
     if (page === "list") renderList();
     if (page === "article") renderArticle();
