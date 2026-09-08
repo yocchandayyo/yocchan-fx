@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 """記事ごとの静的HTMLページと sitemap.xml / robots.txt を生成する。
 
+入力の data/articles.json はこのサイトの運営側(Claude)が書く一次データで、外部ユーザーの入力は入らない。
+本文(leadPara/sections/memo)は app.js と同じく意図したインラインHTML(リンク等)を許すため生のまま出力し、
+タイトル・ポイント・タグ・参照元など平文のフィールドはエスケープする。
+
 article.html?id=... はJSで描画するため検索エンジンに弱い。
 このスクリプトが data/articles.json から /post/<id>.html を書き出し、
 title・description・canonical・OGP・JSON-LD を静的に持たせる。
@@ -142,20 +146,22 @@ def article_body(a):
         )
         sections.append(f"<h2>{s.get('h', '')}</h2>{body}" + (f'<div class="scenario">{scen}</div>' if scen else ""))
 
-    points = "".join(f"<li>{p}</li>" for p in a.get("points", []))
+    points = "".join(f"<li>{esc(p)}</li>" for p in a.get("points", []))
     memo = (f'<div class="memo-box"><img class="memo-owl" src="/assets/img/fx_icon.png?v=3" alt=""><div><b>ヨル教授メモ:</b> {a["memo"]}</div></div>'
             if a.get("memo") else "")
     tags = "".join(f'<span class="pill">{esc(t)}</span>' for t in a.get("tags", []))
     sources = ""
     if a.get("sources"):
+        # 参照元は http(s) のURLだけ許可する
+        safe = [s for s in a["sources"] if str(s.get("url", "")).startswith(("http://", "https://"))]
         items = "".join(
             f'<li><a href="{esc(s["url"])}" target="_blank" rel="noopener noreferrer">{esc(s["title"])}</a><span class="pub">{esc(s.get("publisher", ""))}</span></li>'
-            for s in a["sources"]
+            for s in safe
         )
         sources = f'<div class="source-box"><div class="label">参考にした記事</div><ul>{items}</ul></div>'
 
     return f'''<span class="cat {cls}">{label}</span>
-      <h1>{a["title"]}</h1>
+      <h1>{esc(a["title"])}</h1>
       <div class="byline"><span>{fmt_full_date(a["date"])}</span><span>{read_minutes(a)}分で読める</span><span class="who"><img src="/assets/img/fx_icon.png?v=3" alt="">{AUTHOR}</span></div>
       {hero}
       <div class="point-box"><div class="label">この記事のポイント</div><ul>{points}</ul></div>
@@ -223,7 +229,7 @@ def build_page(a, verification_tag=""):
 <link href="{FONTS}" rel="stylesheet">
 <link rel="icon" type="image/png" href="/assets/img/fx_icon.png?v=3">
 <link rel="stylesheet" href="/assets/css/style.css?v={CSS_VER}">
-<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>
+<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False).replace("</", "<\/")}</script>
 </head>
 <body data-page="post">
 
