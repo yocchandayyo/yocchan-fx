@@ -25,7 +25,7 @@
 <meta property="og:url" content="https://yocchan-fx.com/">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/png" href="assets/img/fx_icon.png?v=3">
-<link rel="stylesheet" href="assets/css/style.css?v=18">
+<link rel="stylesheet" href="assets/css/style.css?v=19">
 </head>
 <body data-page="home">
 
@@ -37,7 +37,8 @@
     </a>
     <nav class="global-nav" aria-label="グローバルナビゲーション">
       <a href="index.html" class="active">ホーム</a>
-      <a href="articles.html">記事一覧</a>
+      <a href="articles.html?cat=market">相場観</a>
+      <a href="articles.html?cat=basics">FX入門</a>
       <a href="brokers.html">口座比較</a>
       <a href="vps.html">VPS</a>
       <a href="calendar.html">経済指標</a>
@@ -49,6 +50,7 @@
 <section class="dawn" aria-label="今朝の相場">
   <div class="inner wrap">
     <div class="dateline"><b id="mastDate">&nbsp;</b><span>今朝の版</span><span>ドル円とポンドドルの相場観</span></div>
+    <p class="thesis">ドル円とポンドドルを中心に、毎朝のチャート観測と材料を記録する個人の相場ログです。</p>
 
     <div class="clock" aria-label="FX市場の24時間と現在時刻">
       <div class="track">
@@ -70,14 +72,35 @@
 
 <main class="wrap">
   <div class="home-cols">
-    <section aria-label="新着記事">
-      <h2 class="sec-title">新着記事</h2>
-      <div id="latestList"></div>
-      <p style="text-align:right;margin-top:14px;">
-        <a href="articles.html" style="font-size:13px;font-weight:700;color:var(--primary);">記事一覧を見る →</a>
-      </p>
-    </section>
+    <div>
+      <section aria-label="毎朝の相場観">
+        <h2 class="sec-title">毎朝の相場観</h2>
+        <div id="marketList"></div>
+        <p style="text-align:right;margin-top:14px;">
+          <a href="articles.html?cat=market" style="font-size:13px;font-weight:700;color:var(--primary);">もっと見る →</a>
+        </p>
+      </section>
+      <section aria-label="基礎から学ぶFX入門" style="margin-top:40px;">
+        <h2 class="sec-title">基礎から学ぶFX入門</h2>
+        <div id="basicsList"></div>
+        <p style="text-align:right;margin-top:14px;">
+          <a href="articles.html?cat=basics" style="font-size:13px;font-weight:700;color:var(--primary);">もっと見る →</a>
+        </p>
+      </section>
+    </div>
     <aside>
+      <div class="widget author-widget">
+        <h2 class="sec-title">書いている人</h2>
+        <div class="author-row">
+          <img class="author-avatar" src="assets/img/fx_icon.png?v=3" alt="">
+          <div>
+            <p class="author-name">よっちゃん<small>(FX歴8年)</small></p>
+            <p class="author-desc">デイトレ中心。ドル円とポンドドルを毎朝観測して記録しています。</p>
+            <p class="author-tags">USD/JPY · GBP/USD · デイトレ</p>
+          </div>
+        </div>
+        <p class="author-more"><a href="about.html">このサイトについて →</a></p>
+      </div>
       <div class="widget">
         <h2 class="sec-title">読まれています</h2>
         <ol class="rank-list" id="popularList"></ol>
@@ -116,6 +139,6 @@
   </div>
 </footer>
 
-<script src="assets/js/app.js?v=18"></script>
+<script src="assets/js/app.js?v=19"></script>
 </body>
 </html>

@@ -39,13 +39,18 @@
   const adTag = (a) =>
     `<a href="https://www.tcs-asp.net/alink?AC=${TCS_AC}&LC=${a.lc}&SQ=0&isq=${a.isq}" target="_blank" rel="nofollow sponsored noopener">` +
     `<img src="https://img.tcs-asp.net/imagesender?ac=${TCS_AC}&lc=${a.lc}&isq=${a.isq}&psq=0" width="300" height="250" alt="${a.alt}" loading="lazy"></a>`;
+  const AD_WHY = {
+    matsui: "1通貨から。少額で試せて、サポートの評判が高い会社です",
+    hirose: "約定力と情報量に定評。ポンド系のスプレッドが狭めです"
+  };
+  const adItem = (key) => `<div class="ad-item">${adTag(ADS[key])}<p class="ad-why">${AD_WHY[key] || ""}</p></div>`;
   const AD_NOTE = "FXは証拠金取引のため、相場の変動により預けた証拠金を上回る損失が出ることがあります。各社のリスク説明を確認のうえ、ご自身の判断でお申し込みください。";
   const adBox = (keys, title, more) =>
     `<div class="ad-box"><div class="ad-head"><span class="ad-pr">PR</span>${title}</div>` +
-    `<div class="ad-grid">${keys.map(k => adTag(ADS[k])).join("")}</div>` +
-    `<p class="ad-more"><a href="https://www.tcs-asp.net/alink?AC=${TCS_AC}&LC=SBI50&SQ=0&isq=1" target="_blank" rel="nofollow sponsored noopener">1通貨から練習するなら SBI FXトレード →</a></p>` +
+    `<div class="ad-grid">${keys.map(adItem).join("")}</div>` +
+    `<p class="ad-more"><a href="https://www.tcs-asp.net/alink?AC=${TCS_AC}&LC=SBI50&SQ=0&isq=1" target="_blank" rel="nofollow sponsored noopener">1通貨から練習するなら SBI FXトレード →</a> 1通貨から取引でき、ドル円スプレッドが狭い。評判基準の比較で1位に置いています</p>` +
     `<p class="ad-more"><a href="https://www.tradingview.com/?aff_id=170482" target="_blank" rel="nofollow sponsored noopener">チャート分析に使っている TradingView →</a></p>` +
-    (more ? `<p class="ad-more"><a href="brokers.html">FX会社9社の比較を見る →</a></p>` : "") +
+    (more ? `<p class="ad-more"><a href="brokers.html">選定は単価ではなく評判(満足度・処分歴・障害歴)で決めています → 口座比較</a></p>` : "") +
     `<p class="ad-note">${AD_NOTE}</p></div>`;
 
   /* ---------- small SVG builders ---------- */
@@ -88,6 +93,27 @@
   const fmtDate = (iso) => {
     const [, m, d] = iso.split("-").map(Number);
     return `${m}月${d}日`;
+  };
+  /* ISO日付にn日足す(月またぎ対応) */
+  const addDaysISO = (iso, n) => {
+    const d = new Date(iso + "T00:00:00");
+    d.setDate(d.getDate() + n);
+    const p = (x) => String(x).padStart(2, "0");
+    return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
+  };
+  /* その指標発表日(または翌日以降2日以内)で最も早い相場観記事(analysis/news)を探す。
+     day.articleId があれば手動指定を優先する */
+  const findMorningArticle = (day, articles) => {
+    if (day.articleId) {
+      const forced = articles.find(a => a.id === day.articleId);
+      if (forced) return forced;
+    }
+    if (!day.date) return null;
+    const start = day.date, end = addDaysISO(day.date, 2);
+    const candidates = articles
+      .filter(a => (a.category === "analysis" || a.category === "news") && a.date >= start && a.date <= end)
+      .sort((a, b) => a.date.localeCompare(b.date));
+    return candidates[0] || null;
   };
   const fmtFullDate = (iso) => {
     const [y, m, d] = iso.split("-").map(Number);
@@ -184,7 +210,10 @@
       <span class="more">続きを読む →</span>`;
     $("#featured").href = `post/${featured.id}.html`;
 
-    $("#latestList").innerHTML = rest.slice(0, 3).map(cardHTML).join("");
+    const marketArticles = rest.filter(a => a.category === "analysis" || a.category === "news").slice(0, 6);
+    const basicsArticles = rest.filter(a => a.category === "technical").slice(0, 6);
+    $("#marketList").innerHTML = marketArticles.map(cardHTML).join("");
+    $("#basicsList").innerHTML = basicsArticles.map(cardHTML).join("");
 
     const popularIds = ["2026-07-29-order-types", "2026-07-31-rsi-basics", "2026-08-02-moving-average"];
     $("#popularList").innerHTML = popularIds
@@ -200,7 +229,7 @@
       .filter(day => day.items.length)
       .map((day, idx) => {
         const best = [...day.items].sort((a, b) => rank[b.imp] - rank[a.imp])[0];
-        return { idx, label: day.label, ...best };
+        return { idx, label: day.label, date: day.date, articleId: day.articleId, ...best };
       });
     const picked = [...perDay]
       .sort((a, b) => (rank[b.imp] - rank[a.imp]) || (a.idx - b.idx))
@@ -211,27 +240,45 @@
       const m = label.match(/(\d+)月(\d+)日\((.)\)/);
       return m ? `${m[1]}/${m[2]} ${m[3]}` : label;
     };
-    $("#weekCal").innerHTML = picked.map(x => `<tr>
+    $("#weekCal").innerHTML = picked.map(x => {
+      let linkRow = "";
+      if (x.date && x.date < today && x.imp === "hi") {
+        const art = findMorningArticle(x, articles);
+        if (art) linkRow = `<tr><td colspan="3" class="cal-mini-link"><a href="post/${art.id}.html">→ 翌朝の相場観を読む</a></td></tr>`;
+      }
+      return `<tr>
         <td class="d">${shortDay(x.label)}</td>
         <td>${x.country} ${x.name}</td>
-        <td class="imp ${x.imp}">${impLabel[x.imp]}</td></tr>`)
-      .join("");
+        <td class="imp ${x.imp}">${impLabel[x.imp]}</td></tr>${linkRow}`;
+    }).join("");
   };
 
+  /* 「相場観」= analysis+news、「FX入門」= technical のグループ絞り込み。?cat= で共有・ブックマーク可能にする */
+  const CAT_GROUP = { market: ["analysis", "news"], basics: ["technical"] };
   const renderList = async () => {
     const articles = await fetchJSON("data/articles.json");
     const listEl = $("#articleList");
     const chips = document.querySelectorAll(".filter-chips button");
     const draw = (key) => {
-      const items = key === "all" ? articles : articles.filter(a => a.category === key);
+      const items = key === "all" ? articles
+        : CAT_GROUP[key] ? articles.filter(a => CAT_GROUP[key].includes(a.category))
+        : articles.filter(a => a.category === key);
       listEl.innerHTML = items.map(cardHTML).join("") ||
         `<p style="color:var(--muted);font-size:14px;">このカテゴリの記事はまだありません。毎朝の分析でこれから増えていきます。</p>`;
     };
+    const select = (key) => {
+      chips.forEach(b => b.classList.toggle("on", b.dataset.cat === key));
+      draw(key);
+      markNavCat();
+    };
     chips.forEach(btn => btn.addEventListener("click", () => {
-      chips.forEach(b => b.classList.toggle("on", b === btn));
-      draw(btn.dataset.cat);
+      const u = new URL(location.href);
+      if (btn.dataset.cat === "all") u.searchParams.delete("cat");
+      else u.searchParams.set("cat", btn.dataset.cat);
+      history.replaceState(null, "", u);
+      select(btn.dataset.cat);
     }));
-    draw("all");
+    select(new URLSearchParams(location.search).get("cat") || "all");
   };
 
   const renderArticle = async () => {
@@ -266,6 +313,18 @@
         }</ul></div>`
       : "";
 
+    let seeAlsoHTML = "";
+    if (a.category === "technical") {
+      const marketArticle = articles
+        .filter(x => x.category === "analysis" || x.category === "news")
+        .sort((x, y) => y.date.localeCompare(x.date))[0];
+      if (marketArticle) {
+        seeAlsoHTML = `<div class="see-also">実際の相場ではどう動くか。<a href="post/${marketArticle.id}.html">毎朝の相場観もあわせてどうぞ →</a></div>`;
+      }
+    } else {
+      seeAlsoHTML = `<div class="see-also">用語でつまずいたら。<a href="articles.html?cat=basics">FX入門の記事一覧を見る →</a></div>`;
+    }
+
     $("#article").innerHTML = `
       <span class="cat ${c.cls}">${c.label}</span>
       <h1>${a.title}</h1>
@@ -276,6 +335,7 @@
       <p class="lead-para">${a.leadPara}</p>
       ${sectionsHTML}
       ${a.memo ? `<div class="memo-box"><img class="memo-owl" src="assets/img/fx_icon.png?v=3" alt=""><div><b>ヨル教授メモ:</b> ${a.memo}</div></div>` : ""}
+      ${seeAlsoHTML}
       ${adBox(["matsui", "hirose"], "FX口座の開設はこちら", true)}
       <div class="tag-row">タグ: ${(a.tags || []).map(t => `<span class="pill">${t}</span>`).join("")}</div>
       ${sourcesHTML}
@@ -283,15 +343,23 @@
   };
 
   const renderCalendar = async () => {
-    const cal = await fetchJSON("data/calendar.json");
+    const [cal, articles] = await Promise.all([
+      fetchJSON("data/calendar.json"),
+      fetchJSON("data/articles.json")
+    ]);
     $("#calRange").textContent = cal.range;
     const today = todayISO();
 
     const dayRows = (days) => days.map(day => {
       const state = !day.date ? "" : day.date < today ? "past" : day.date === today ? "today" : "";
       const badge = state === "today" ? `<span class="today-badge">今日</span>` : "";
+      let morningLink = "";
+      if (state === "past" && day.items.some(it => it.imp === "hi")) {
+        const art = findMorningArticle(day, articles);
+        if (art) morningLink = `<a class="cal-morning-link" href="post/${art.id}.html">→ 翌朝の相場観を読む</a>`;
+      }
       const dayRow = `<tr class="day-row ${state}"${state === "today" ? ' id="calToday"' : ""}>
-          <td colspan="6">${day.label}${badge}</td></tr>`;
+          <td colspan="6">${day.label}${badge}${morningLink}</td></tr>`;
       const items = day.items.map(it => {
         const actual = it.actual
           ? `<td class="num actual">${it.actual}</td>`
@@ -352,8 +420,22 @@
     draw();
   };
 
+  /* グローバルナビの「相場観」「FX入門」は articles.html?cat=... へのリンクなので、
+     現在地のクエリに合わせてどちらがアクティブかをJSで判定する */
+  const markNavCat = () => {
+    const links = document.querySelectorAll('.global-nav a[href*="cat="]');
+    if (!links.length) return;
+    const onList = document.body.dataset.page === "list";
+    const cat = new URLSearchParams(location.search).get("cat") || "all";
+    links.forEach(a => {
+      const linkCat = new URL(a.getAttribute("href"), location.href).searchParams.get("cat");
+      a.classList.toggle("active", onList && linkCat === cat);
+    });
+  };
+
   /* ---------- boot ---------- */
   document.addEventListener("DOMContentLoaded", () => {
+    markNavCat();
     const page = document.body.dataset.page;
     if (page === "home") {
       loadRates(); renderHome(); renderClock();
