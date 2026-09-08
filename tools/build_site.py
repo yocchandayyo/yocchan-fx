@@ -23,6 +23,7 @@ OUT_DIR = ROOT / "post"
 SITE = "https://yocchan-fx.com"
 AUTHOR = "よっちゃん(FX歴8年)"
 GA_ID = "G-M79V6CNK6L"
+ADSENSE_CLIENT = "ca-pub-6679576726407478"
 TCS_AC = "C142787"
 CSS_VER = "12"
 
@@ -202,6 +203,7 @@ def build_page(a, verification_tag=""):
 <html lang="ja">
 <head>
 <!-- Google tag (gtag.js) -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={ADSENSE_CLIENT}" crossorigin="anonymous"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id={GA_ID}"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
