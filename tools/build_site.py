@@ -229,7 +229,7 @@ def build_page(a, verification_tag=""):
 <link href="{FONTS}" rel="stylesheet">
 <link rel="icon" type="image/png" href="/assets/img/fx_icon.png?v=3">
 <link rel="stylesheet" href="/assets/css/style.css?v={CSS_VER}">
-<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False).replace("</", "<\/")}</script>
+<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False).replace("</", "<\\/")}</script>
 </head>
 <body data-page="post">
 
