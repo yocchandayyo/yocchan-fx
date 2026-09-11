@@ -120,7 +120,9 @@ h1, h2, h3 { color: var(--ink-strong); }
   margin-left: 2px;
   border-left: 1px solid var(--line);
 }
-@media (max-width: 1000px) { .stance { display: none; } .clock .lbl.start { display: none; } }
+/* ナビと同じ行に収まらない幅では出さない(1180px以下は4行に折れて下にはみ出す) */
+@media (max-width: 1180px) { .stance { display: none; } }
+@media (max-width: 1000px) { .clock .lbl.start { display: none; } }
 .global-nav {
   display: flex;
   gap: 2px;
