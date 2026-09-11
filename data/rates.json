@@ -1,14 +1,14 @@
 {
   "updated": "2026-09-11",
-  "updatedAt": "2026-09-11 18:51",
+  "updatedAt": "2026-09-11 18:55",
   "source": "yahoo",
   "pairs": [
     {
       "pair": "USD/JPY",
       "base": "USD",
       "quote": "JPY",
-      "price": 154.1,
-      "changePct": -0.17,
+      "price": 154.07,
+      "changePct": -0.19,
       "history": [
         156.12,
         155.89,
@@ -69,15 +69,15 @@
         154.3,
         154.09,
         154.31,
-        154.1
+        154.07
       ]
     },
     {
       "pair": "GBP/USD",
       "base": "GBP",
       "quote": "USD",
-      "price": 1.3509,
-      "changePct": 0.0,
+      "price": 1.3507,
+      "changePct": -0.02,
       "history": [
         1.3519,
         1.3521,
@@ -138,7 +138,7 @@
         1.3505,
         1.3525,
         1.351,
-        1.3509
+        1.3507
       ]
     },
     {
@@ -214,8 +214,8 @@
       "pair": "GBP/JPY",
       "base": "GBP",
       "quote": "JPY",
-      "price": 208.17,
-      "changePct": -0.09,
+      "price": 208.06,
+      "changePct": -0.14,
       "history": [
         211.05,
         210.76,
@@ -276,7 +276,7 @@
         208.39,
         208.39,
         208.47,
-        208.17
+        208.06
       ]
     }
   ]
