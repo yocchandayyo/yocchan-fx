@@ -1,22 +1,13 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6679576726407478" crossorigin="anonymous"></script>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-M79V6CNK6L"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-M79V6CNK6L');
-</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="canonical" href="https://yocchan-fx.com/vps.html">
 <title>FX自動売買(EA)向けVPSの選び方と比較 | よっちゃんのFX</title>
 <meta name="description" content="MT4/MT5のEAを止めずに動かすためのVPS選び。お名前.com、ABLENET、ConoHa、Xserver、さくら、使えるねっとの6社を、料金とメモリと東京DCの有無で比べました。">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<meta property="og:site_name" content="よっちゃんのFX">
+<meta property="og:locale" content="ja_JP">
 <meta property="og:title" content="FX自動売買(EA)向けVPSの選び方と比較 | よっちゃんのFX">
 <meta property="og:description" content="MT4/MT5のEAを止めずに動かすためのVPS選び。国内6社を料金とメモリと東京DCの有無で比べました。">
 <meta property="og:type" content="article">
@@ -24,7 +15,68 @@
 <meta property="og:url" content="https://yocchan-fx.com/vps.html">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/png" href="assets/img/fx_icon.png?v=3">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css?v=23">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "VPSに置いたMT4は、手元のPCを閉じても動きますか",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "動きます。VPSはデータセンター内で24時間動いているWindowsです。手元のPCはリモートデスクトップで画面を見に行くための窓口にすぎません。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Macしか持っていません",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "問題ありません。Macの「Windows App」(旧Microsoft Remote Desktop)からVPSに接続すれば、Windows上のMT4を操作できます。MT4自体はVPS側で動くので、手元がMacでもiPadでも構いません。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "メモリ1GBの一番安いプランではダメですか",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "EA1本なら動くことは動きます。ただ、MT4は1本で1GB近く使うことがあり、指標発表で値動きが激しくなると詰まります。月に数百円の差なので、2GB以上にしておくほうが精神衛生上いいです。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "VPSの会社が障害を起こしたらどうなりますか",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "EAが止まります。だから僕はどのEAにも、エントリーと同時に損切りの逆指値を「FX会社のサーバーに」入れる設定にしています。これがあれば、VPSが落ちても最悪の損失は決まっています。VPSは事故を減らす道具で、ゼロにする道具ではありません。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "海外のVPSは使わなくていいですか",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "国内のFX会社を使うなら、国内(できれば東京)のVPSのほうが遅延が短いので、海外VPSを選ぶ理由はあまりありません。海外FX会社の海外サーバーに繋ぐ場合だけ、その近くのVPSを検討する価値があります。"
+      }
+    }
+  ]
+}
+</script>
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6679576726407478" crossorigin="anonymous"></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-M79V6CNK6L"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-M79V6CNK6L');
+</script>
 </head>
 <body data-page="vps">
 
