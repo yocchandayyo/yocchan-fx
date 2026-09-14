@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=24">
+<link rel="stylesheet" href="assets/css/style.css?v=25">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -86,7 +86,7 @@
 <header class="site-header">
   <div class="wrap">
     <a class="brand" href="index.html" aria-label="よっちゃんのFX ホーム">
-      <img class="avatar" src="assets/img/fx_icon.png?v=3" alt="">
+      <img class="avatar" src="assets/img/fx_icon.png?v=3" width="32" height="32" alt="よっちゃんのFX" decoding="async">
       <span>よっちゃんのFX</span>
     </a>
     <span class="stance">デイトレ歴8年。ドル円・ポンドドルを中心に、毎朝の相場観を淡々と記録する個人メディア</span>
@@ -119,7 +119,7 @@
       <a href="#each">各社の話</a>
       <a href="#faq">よくある質問</a>
     </div>
-    <img class="owl" src="assets/img/fx_icon.png?v=3" alt="">
+    <img class="owl" src="assets/img/fx_icon.png?v=3" width="120" height="120" alt="アイコン" decoding="async">
   </section>
   <p class="bk-pr-note">本ページにはプロモーション(広告)が含まれます。お名前.com、ABLENET、さくらのVPSのリンクはA8.netの、FXTFのリンクはTCSアフィリエイトのアフィリエイトリンクです。料金は2026年9月3日に各社公式サイトで確認した税込の数字です。改定が多い分野なので、申し込む前に必ず公式ページで再確認してください。</p>
 
@@ -150,14 +150,14 @@
   </div>
 
   <h2 class="bk-sec-title" id="why"><small>WHY VPS</small>自宅のPCで動かしてはいけない理由</h2>
-  <div class="prose" style="margin:0 0 10px;max-width:none;">
+  <div class="prose prose-wide">
     <p>EAを自宅PCで回している人の「止まった」話で多いのは、Windows Updateの自動再起動、停電や雷、そして家族やペットが電源タップに触れてしまう、という3つです。ポジションを持ったまま止まると、損切りの注文だけがサーバーに残ってくれる保証はありません。VPSに移せば、止まるのは自分で止めたときだけ、という状態にかなり近づきます。</p>
     <p>VPSはデータセンターの中で動くWindowsを月額で借りるサービスです。電源も回線も空調も向こうが管理していて、こちらは手元のPCからリモートデスクトップで画面を見るだけ。手元のPCを閉じてもEAは動き続けます。</p>
     <p>ただし万能ではありません。VPS側のメンテナンスや障害はあり得ますし、安いプランほど指標発表の瞬間に重くなります。それでも自宅運用の3つの事故(再起動、停電、回線切断)から解放される価値のほうが、月2,000円台の出費よりずっと大きいと思っています。</p>
   </div>
 
   <h2 class="bk-sec-title" id="axis"><small>HOW TO CHOOSE</small>選ぶときに見る4つの数字</h2>
-  <div class="steps" style="margin-bottom:10px;">
+  <div class="steps steps-tight">
     <div class="step">
       <span class="no">01</span>
       <h3>メモリは2GBから、3本なら4GB</h3>
@@ -174,7 +174,7 @@
       <p>MT4とMT5はWindowsアプリです。Linuxの安いVPSは動かない(か、無理に動かしても不安定)ので、必ず「Windows Server」の表記があるプランを選びます。</p>
     </div>
   </div>
-  <div class="steps" style="grid-template-columns:1fr;">
+  <div class="steps steps-1col">
     <div class="step">
       <span class="no">04</span>
       <h3>お試し期間と最低契約期間</h3>
@@ -197,7 +197,7 @@
         </tr>
         <tr>
           <td class="nm"><a href="#v-ablenet">ABLENET VPS</a><small>Win2</small></td>
-          <td class="num good">2,865円<small style="display:block;color:var(--muted);font-weight:500">初回2,070円</small></td><td class="num">3.5GB / 3vCPU</td><td class="num good">0円</td><td class="good">10日間</td><td class="good">なし</td><td>未公開</td><td>なし</td>
+          <td class="num good">2,865円<small class="sub">初回2,070円</small></td><td class="num">3.5GB / 3vCPU</td><td class="num good">0円</td><td class="good">10日間</td><td class="good">なし</td><td>未公開</td><td>なし</td>
           <td><a class="btn-cta" href="https://px.a8.net/svt/ejp?a8mat=3H3ID8+2MNZIA+4NIK+61C2Q" target="_blank" rel="nofollow sponsored noopener">公式へ</a></td>
         </tr>
         <tr>
@@ -207,7 +207,7 @@
         </tr>
         <tr>
           <td class="nm"><a href="#v-sakura">さくらのVPS for Windows</a><small>W2G</small></td>
-          <td class="num">2,750円</td><td class="num">2GB / 3コア</td><td class="num good">0円</td><td>2週間(要確認)</td><td class="good">なし(月払い)</td><td style="color:var(--down);font-weight:700">大阪・石狩のみ</td><td>なし</td>
+          <td class="num">2,750円</td><td class="num">2GB / 3コア</td><td class="num good">0円</td><td>2週間(要確認)</td><td class="good">なし(月払い)</td><td class="warn">大阪・石狩のみ</td><td>なし</td>
           <td><a class="btn-cta" href="https://px.a8.net/svt/ejp?a8mat=4BC36Q+5AIRWI+D8Y+CADXE" target="_blank" rel="nofollow sponsored noopener">公式へ</a></td>
         </tr>
         <tr>
@@ -217,7 +217,7 @@
         </tr>
         <tr>
           <td class="nm"><a href="#v-tsukaeru">使えるねっと FX専用VPS</a><small>ゴールド</small></td>
-          <td class="num">8,800円<small style="display:block;color:var(--muted);font-weight:500">年契約 7,920円</small></td><td class="num">4GB / 4CPU</td><td class="num">2,530円</td><td>30日返金保証</td><td>1ヶ月</td><td>未公開</td><td>なし</td>
+          <td class="num">8,800円<small class="sub">年契約 7,920円</small></td><td class="num">4GB / 4CPU</td><td class="num">2,530円</td><td>30日返金保証</td><td>1ヶ月</td><td>未公開</td><td>なし</td>
           <td><a class="btn-cta" href="https://www.tsukaeru.net/forex" target="_blank" rel="nofollow sponsored noopener">公式へ</a></td>
         </tr>
       </tbody>
@@ -226,7 +226,7 @@
   <p class="spec-note">※ お名前.comは2024年12月以降、月額に「サービス維持調整費」(確認時点で17%)が上乗せされます。表の金額は上乗せ前です。※ ConoHaの2,277円は36ヶ月まとめ払いの単価で、短期契約だと上がります。※「未確認」「未公開」は公式ページで明記を見つけられなかった項目です。</p>
 
   <div class="ad-box" id="mt4-account"><div class="ad-head"><span class="ad-pr">PR</span>EAを置くMT4口座がまだない人へ</div>
-    <p>VPSを借りても、MT4を提供している国内FX会社の口座がなければEAは動かせません。国内でMT4をそのまま使えるのはFXTFなど数社です。評判の総合点は高くないので当サイトの「迷ったら3社」には入れていませんが、目的がEA運用ならそのまま候補になります。<a href="brokers.html#fxtf" style="color:var(--primary);font-weight:700;">口座比較のFXTFの項</a>で良い声と気になる声を読んでから決めてください。</p>
+    <p>VPSを借りても、MT4を提供している国内FX会社の口座がなければEAは動かせません。国内でMT4をそのまま使えるのはFXTFなど数社です。評判の総合点は高くないので当サイトの「迷ったら3社」には入れていませんが、目的がEA運用ならそのまま候補になります。<a href="brokers.html#fxtf" class="link-strong">口座比較のFXTFの項</a>で良い声と気になる声を読んでから決めてください。</p>
     <p class="ad-more"><a class="btn-cta" href="https://www.tcs-asp.net/alink?AC=C142787&amp;LC=FXTRD1&amp;SQ=0&amp;isq=282" target="_blank" rel="nofollow sponsored noopener">FXTF(MT4)の公式サイトを見る →</a></p>
     <p class="ad-note">FXは証拠金取引のため、相場の変動により預けた証拠金を上回る損失が出ることがあります。各社のリスク説明を確認のうえ、ご自身の判断でお申し込みください。</p></div>
 
@@ -250,7 +250,7 @@
         <div class="voice good"><div class="lb">よく見かける良い声</div><ul><li>指標発表のときも約定がスムーズだった</li><li>サポートの返信が丁寧</li><li>FX専用なので設定で迷わない</li></ul><div class="src">出典: csplan.jp、faclog.jp などVPS比較メディアの傾向</div></div>
         <div class="voice bad"><div class="lb">気になる声</div><ul><li>2024年12月から「サービス維持調整費」が上乗せされ、実質値上げと受け止める声が複数</li><li>最低契約が3ヶ月(開始月を除く)</li></ul><div class="src">出典: 同上</div></div>
       </div>
-      <div class="yocchan"><img src="assets/img/fx_icon.png?v=3" alt=""><div><b>よっちゃんのひとこと</b>調整費の上乗せは正直気持ちのいい話ではないですが、それでも2GBで3,000円強なら安いほうです。MT4を自分で入れるのが面倒な人はここで間違いないと思います。</div></div>
+      <div class="yocchan"><img src="assets/img/fx_icon.png?v=3" width="48" height="48" alt="よっちゃん" loading="lazy" decoding="async"><div><b>よっちゃんのひとこと</b>調整費の上乗せは正直気持ちのいい話ではないですが、それでも2GBで3,000円強なら安いほうです。MT4を自分で入れるのが面倒な人はここで間違いないと思います。</div></div>
     </div>
   </article>
 
@@ -272,7 +272,7 @@
         <div class="voice good"><div class="lb">よく見かける良い声</div><ul><li>長期間止まらない、安定している</li><li>この価格でこのスペックはお得</li></ul><div class="src">出典: csplan.jp など自動売買ユーザーの評価傾向</div></div>
         <div class="voice bad"><div class="lb">気になる声</div><ul><li>サポートはメールのみで平日9時〜17時45分。夜間や週末は待つことになる</li><li>2023年の値上げへの不満</li></ul><div class="src">出典: 同上</div></div>
       </div>
-      <div class="yocchan"><img src="assets/img/fx_icon.png?v=3" alt=""><div><b>よっちゃんのひとこと</b>MT4は自分でインストールしますが、10分で終わる作業です。それより「合わなければ翌月やめられる」ことのほうが、初めての1台としては大きな価値だと思います。</div></div>
+      <div class="yocchan"><img src="assets/img/fx_icon.png?v=3" width="48" height="48" alt="よっちゃん" loading="lazy" decoding="async"><div><b>よっちゃんのひとこと</b>MT4は自分でインストールしますが、10分で終わる作業です。それより「合わなければ翌月やめられる」ことのほうが、初めての1台としては大きな価値だと思います。</div></div>
     </div>
   </article>
 
@@ -357,7 +357,7 @@
   </article>
 
   <h2 class="bk-sec-title"><small>FREE VPS</small>FX会社の「無料VPS」について</h2>
-  <div class="prose" style="margin:0 0 10px;max-width:none;">
+  <div class="prose prose-wide">
     <p>楽天証券のMT4口座には「VPS1ヶ月無料」の案内があり、OANDA証券は口座保有者向けにBeeksのVPSを特別価格で出しています。こういう無料や割引は、たいてい「一定の取引量を満たしたら翌月も無料」という条件付きで、満たさないと有料に切り替わります。条件の数字は会社ごとに違い、変わることも多いので、ここには書きません。使うなら申し込む前に必ず公式ページで確認してください。</p>
   </div>
 
@@ -376,7 +376,7 @@
     <div class="row">
       <a class="btn-cta" href="https://px.a8.net/svt/ejp?a8mat=3BSGN0+DJM2RM+50+3N1AJ6" target="_blank" rel="nofollow sponsored noopener">お名前.com for FX</a>
       <a class="btn-cta" href="https://px.a8.net/svt/ejp?a8mat=3H3ID8+2MNZIA+4NIK+61C2Q" target="_blank" rel="nofollow sponsored noopener">ABLENET VPS</a>
-      <a class="btn-ghost" href="brokers.html#auto" style="background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.3);color:#fff;">自動売買向けのFX口座を見る</a>
+      <a class="btn-ghost on-dark" href="brokers.html#auto">自動売買向けのFX口座を見る</a>
     </div>
   </div>
 
@@ -404,6 +404,6 @@
   </div>
 </footer>
 
-<script src="assets/js/app.js?v=24"></script>
+<script src="assets/js/app.js?v=25"></script>
 </body>
 </html>

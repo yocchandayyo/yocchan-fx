@@ -1509,3 +1509,15 @@ h1, h2, h3 { color: var(--ink-strong); }
   .bk-card .ad-grid { justify-content: center; }
   .bk-sec-title { font-size: 19px; }
 }
+
+/* ============================================================
+   vps.html のインラインstyle置き換え (2026-09-14)
+   ============================================================ */
+.prose.prose-wide { margin: 0 0 10px; max-width: none; }
+.steps.steps-tight { margin-bottom: 10px; }
+.steps.steps-1col { grid-template-columns: 1fr; }
+.spec-table small.sub { display: block; color: var(--muted); font-weight: 500; }
+.spec-table td.warn { color: var(--down); font-weight: 700; }
+.link-strong { color: var(--primary); font-weight: 700; }
+.btn-ghost.on-dark { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.3); color: #fff; }
+.btn-ghost.on-dark:hover { background: rgba(255,255,255,.22); border-color: #fff; }
