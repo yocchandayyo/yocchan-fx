@@ -129,6 +129,11 @@ h1, h2, h3 { color: var(--ink-strong); }
 @media (max-width: 1000px) { .clock .lbl.start { display: none; } }
 /* ステマ規制対応の表記(ヘッダー直下) */
 .pr-notice { font-size: 11px; color: var(--muted); text-align: right; margin: 4px 0 0; line-height: 1.5; }
+/* パンくず */
+.breadcrumb { font-size: 12.5px; color: var(--muted); margin: 14px 0 6px; line-height: 1.6; }
+.breadcrumb a { color: var(--primary); }
+.breadcrumb a:hover { text-decoration: underline; }
+.breadcrumb span { color: var(--ink); }
 /* セクション末尾の「もっと見る」 */
 .sec-more { text-align: right; margin-top: 14px; }
 .sec-more a { font-size: 13px; font-weight: 700; color: var(--primary); }
