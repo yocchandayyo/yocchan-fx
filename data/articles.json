@@ -3,7 +3,6 @@
     "id": "2026-09-14-matsui-fx-1tsuka-kara",
     "date": "2026-09-14",
     "category": "technical",
-    "featured": true,
     "thumb": "bars",
     "title": "松井証券FXは1通貨から。100円で本番の練習ができる仕組み",
     "lead": "松井証券のFXは1通貨から注文できます。ドル円なら証拠金の目安は100円前後。デモではなく本番の口座で、負けても痛くない金額から場数を踏める仕組みを数字で見ておきます。",
@@ -182,7 +181,8 @@
         "publisher": "みんかぶFX",
         "url": "https://fx.minkabu.jp/news/378899"
       }
-    ]
+    ],
+    "featured": true
   },
   {
     "id": "2026-09-13-week-ahead-fomc-boj-30h",
