@@ -79,10 +79,14 @@ h1, h2, h3 { color: var(--ink-strong); }
   gap: 28px;
   height: 60px;
 }
-.brand {
+.brand, .brand > a {
   display: flex;
   align-items: center;
   gap: 10px;
+}
+.brand > a { color: inherit; }
+.brand {
+  line-height: 1.2;
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 20px;
@@ -123,6 +127,15 @@ h1, h2, h3 { color: var(--ink-strong); }
 /* ナビと同じ行に収まらない幅では出さない(1180px以下は4行に折れて下にはみ出す) */
 @media (max-width: 1180px) { .stance { display: none; } }
 @media (max-width: 1000px) { .clock .lbl.start { display: none; } }
+/* ステマ規制対応の表記(ヘッダー直下) */
+.pr-notice { font-size: 11px; color: var(--muted); text-align: right; margin: 4px 0 0; line-height: 1.5; }
+/* セクション末尾の「もっと見る」 */
+.sec-more { text-align: right; margin-top: 14px; }
+.sec-more a { font-size: 13px; font-weight: 700; color: var(--primary); }
+.widget .sec-more { margin-top: 10px; }
+.widget .sec-more a { font-size: 12.5px; }
+.sec-gap { margin-top: 40px; }
+.widget-desc { font-size: 13px; color: var(--muted); margin-bottom: 10px; }
 .global-nav {
   display: flex;
   gap: 2px;

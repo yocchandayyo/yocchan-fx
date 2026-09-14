@@ -19,7 +19,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=22">
+<link rel="stylesheet" href="assets/css/style.css?v=23">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -48,10 +48,10 @@
 
 <header class="site-header">
   <div class="wrap">
-    <a class="brand" href="index.html" aria-label="よっちゃんのFX ホーム">
-      <img class="avatar" src="assets/img/fx_icon.png?v=3" alt="">
+    <h1 class="brand"><a href="index.html" aria-label="よっちゃんのFX ホーム">
+      <img class="avatar" src="assets/img/fx_icon.png?v=3" width="32" height="32" alt="よっちゃんのFX" decoding="async">
       <span>よっちゃんのFX</span>
-    </a>
+    </a></h1>
     <span class="stance">デイトレ歴8年。ドル円・ポンドドルを中心に、毎朝の相場観を淡々と記録する個人メディア</span>
     <nav class="global-nav" aria-label="グローバルナビゲーション">
       <a href="index.html" class="active">ホーム</a>
@@ -64,6 +64,7 @@
     </nav>
   </div>
 </header>
+<div class="wrap"><p class="pr-notice">※当サイトはアフィリエイト広告(提携プログラム)を利用して商品・サービスを紹介しています</p></div>
 
 <section class="dawn" aria-label="今朝の相場">
   <div class="inner wrap">
@@ -93,15 +94,15 @@
       <section aria-label="毎朝の相場観">
         <h2 class="sec-title">毎朝の相場観</h2>
         <div id="marketList"></div>
-        <p style="text-align:right;margin-top:14px;">
-          <a href="articles.html?cat=market" style="font-size:13px;font-weight:700;color:var(--primary);">もっと見る →</a>
+        <p class="sec-more">
+          <a href="articles.html?cat=market">もっと見る →</a>
         </p>
       </section>
-      <section aria-label="基礎から学ぶFX入門" style="margin-top:40px;">
+      <section aria-label="基礎から学ぶFX入門" class="sec-gap">
         <h2 class="sec-title">基礎から学ぶFX入門</h2>
         <div id="basicsList"></div>
-        <p style="text-align:right;margin-top:14px;">
-          <a href="articles.html?cat=basics" style="font-size:13px;font-weight:700;color:var(--primary);">もっと見る →</a>
+        <p class="sec-more">
+          <a href="articles.html?cat=basics">もっと見る →</a>
         </p>
       </section>
     </div>
@@ -109,7 +110,7 @@
       <div class="widget author-widget">
         <h2 class="sec-title">書いている人</h2>
         <div class="author-row">
-          <img class="author-avatar" src="assets/img/fx_icon.png?v=3" alt="">
+          <img class="author-avatar" src="assets/img/fx_icon.png?v=3" width="64" height="64" alt="よっちゃん" loading="lazy" decoding="async">
           <div>
             <p class="author-name">よっちゃん<small>(FX歴8年)</small></p>
             <p class="author-desc">デイトレ中心。ドル円とポンドドルを毎朝観測して記録しています。</p>
@@ -126,15 +127,15 @@
       <div class="widget">
         <h2 class="sec-title">次の注目指標</h2>
         <table class="mini-cal"><tbody id="weekCal"></tbody></table>
-        <p style="text-align:right;margin-top:10px;">
-          <a href="calendar.html" style="font-size:12.5px;font-weight:700;color:var(--primary);">カレンダー全体を見る →</a>
+        <p class="sec-more">
+          <a href="calendar.html">カレンダー全体を見る →</a>
         </p>
       </div>
       <div class="widget">
         <h2 class="sec-title">自動売買をやるなら</h2>
-        <p style="font-size:13px;color:var(--muted);margin-bottom:10px;">EAを自宅PCで動かすと、再起動や停電で止まります。国内VPS6社を比較しました。</p>
-        <p style="text-align:right;">
-          <a href="vps.html" style="font-size:12.5px;font-weight:700;color:var(--primary);">VPS比較を見る →</a>
+        <p class="widget-desc">EAを自宅PCで動かすと、再起動や停電で止まります。国内VPS6社を比較しました。</p>
+        <p class="sec-more">
+          <a href="vps.html">VPS比較を見る →</a>
         </p>
       </div>
     </aside>
@@ -151,11 +152,12 @@
       <a href="about.html">このサイトについて</a>
       <a href="disclaimer.html">免責事項</a>
       <a href="privacy.html">プライバシーポリシー</a>
+      <a href="contact.html">お問い合わせ</a>
     </nav>
     <p class="legal">当サイトは情報提供を目的としたもので、特定の金融商品の売買を推奨・勧誘するものではありません。投資の最終判断はご自身の責任でお願いします。FX取引は元本を上回る損失が発生するおそれがあります。<br>© 2026 よっちゃんのFX</p>
   </div>
 </footer>
 
-<script src="assets/js/app.js?v=22"></script>
+<script src="assets/js/app.js?v=23"></script>
 </body>
 </html>

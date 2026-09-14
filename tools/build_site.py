@@ -25,7 +25,7 @@ AUTHOR = "よっちゃん(FX歴8年)"
 GA_ID = "G-M79V6CNK6L"
 ADSENSE_CLIENT = "ca-pub-6679576726407478"
 TCS_AC = "C142787"
-CSS_VER = "22"
+CSS_VER = "23"
 
 CAT = {
     "analysis": ("相場分析", "c-analysis"),
@@ -134,6 +134,7 @@ def header_footer(active_cat=None):
       <a href="/about.html">このサイトについて</a>
       <a href="/disclaimer.html">免責事項</a>
       <a href="/privacy.html">プライバシーポリシー</a>
+      <a href="/contact.html">お問い合わせ</a>
     </nav>
     <p class="legal">当サイトは情報提供を目的としたもので、特定の金融商品の売買を推奨・勧誘するものではありません。投資の最終判断はご自身の責任でお願いします。FX取引は元本を上回る損失が発生するおそれがあります。<br>© 2026 よっちゃんのFX</p>
   </div>
@@ -278,7 +279,7 @@ def build_page(a, verification_tag="", latest_market_article=None):
 
 
 def build_sitemap(articles):
-    static = ["", "articles.html", "brokers.html", "vps.html", "calendar.html", "about.html", "review-sbifx.html"]
+    static = ["", "articles.html", "brokers.html", "vps.html", "calendar.html", "about.html", "contact.html", "review-sbifx.html"]
     latest = articles[0]["date"] if articles else ""
     rows = [f"  <url><loc>{SITE}/{p}</loc><lastmod>{latest}</lastmod></url>" for p in static]
     for a in articles:
