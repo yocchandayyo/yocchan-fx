@@ -77,7 +77,8 @@ def from_yahoo(pair, sym):
         "quote": pair[4:],
         "price": round(price, n),
         "changePct": round((price - prev) / prev * 100, 2),
-        "history": [round(v, n) for v in thin([v for _, v in pts], POINTS)],
+        # 表示は「15分足・直近15時間」なので、5日分を間引くのではなく末尾の60本を切り出す
+        "history": [round(v, n) for _, v in pts[-POINTS:]],
     }, pts[-1][0]
 
 
