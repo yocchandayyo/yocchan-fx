@@ -1,0 +1,49 @@
+name: サイトビルド
+
+# data/articles.json が更新されたら post/<id>.html・sitemap.xml・robots.txt を作り直してコミットする。
+# ローカルで build_site.py を回してからpushした場合は差分ゼロで何もしない(ビルド忘れの保険)。
+# GITHUB_TOKENでのコミットは他のワークフローを起動しないのでループしない。
+on:
+  push:
+    branches: [main]
+    paths:
+      - "data/articles.json"
+      - "tools/build_site.py"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-site
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 静的ページを生成
+        run: python tools/build_site.py
+
+      - name: 差分があればコミット
+        run: |
+          git add post sitemap.xml robots.txt
+          if git diff --cached --quiet; then
+            echo "差分なし(ローカルでビルド済み)"
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "サイトビルド (Actions, $(date -u '+%Y-%m-%d %H:%M') UTC)"
+          # レート更新ワークフローと同時にpushしても負けないよう3回まで取り直す
+          for i in 1 2 3; do
+            git pull --rebase && git push && exit 0
+            sleep 5
+          done
+          exit 1
