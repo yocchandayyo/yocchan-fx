@@ -860,6 +860,15 @@
           "imp": "mid"
         },
         {
+          "time": "22:45",
+          "flag": "US",
+          "country": "米",
+          "name": "S&P Global 総合PMI速報値(9月)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "mid"
+        },
+        {
           "time": "--",
           "flag": "JP",
           "country": "日",
@@ -915,6 +924,15 @@
           "prev": "--",
           "forecast": "--",
           "imp": "hi"
+        },
+        {
+          "time": "23:00",
+          "flag": "US",
+          "country": "米",
+          "name": "ミシガン大学 消費者信頼感指数(9月・確報)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "mid"
         }
       ]
     },
