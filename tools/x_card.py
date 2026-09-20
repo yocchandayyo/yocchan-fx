@@ -80,7 +80,7 @@ def main():
 
     # 行の高さは固定。行数が少ない日に間延びさせず、一覧として同じ密度で出す
     n = len(a.row)
-    step = 0.082
+    step = 0.098
     top = y - 0.06
     for i, raw in enumerate(a.row):
         parts = raw.split("|")
