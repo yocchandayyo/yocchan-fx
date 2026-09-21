@@ -176,7 +176,11 @@ def main():
         ax.text(1.025, yy + gap * 0.14, "%+.2f%%  %s" % (chg, fmt(s, n["last"])), transform=tr,
                 color=col, fontsize=12.5 if is_f else 11, va="top", ha="left")
 
-    ax.yaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(lambda v, _: "%+.1f%%" % v))
+    def pct(v, _):
+        # 目盛りが0.05%刻みになる日に「+0.0%」が重ならないよう小数2桁まで出す
+        s = ("%+.2f" % v).rstrip("0").rstrip(".")
+        return ("0" if s in ("+0", "-0") else s) + "%"
+    ax.yaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(pct))
     ax.xaxis.set_major_formatter(matplotlib.dates.DateFormatter("%H:%M", tz=JST))
     ax.xaxis.set_major_locator(matplotlib.dates.HourLocator(interval=3, tz=JST))
 
