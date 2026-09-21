@@ -1522,3 +1522,24 @@ h1, h2, h3 { color: var(--ink-strong); }
 .link-strong { color: var(--primary); font-weight: 700; }
 .btn-ghost.on-dark { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.3); color: #fff; }
 .btn-ghost.on-dark:hover { background: rgba(255,255,255,.22); border-color: #fff; }
+
+/* ============================================================
+   静的リンク網 (2026-09-21): JS描画前にも記事リンクを置く / 記事下ナビ / 全記事一覧
+   ============================================================ */
+.static-list { list-style: none; }
+.static-list li { display: flex; gap: 14px; align-items: baseline; justify-content: space-between; padding: 12px 2px; border-bottom: 1px solid var(--line); }
+.static-list a { font-weight: 700; color: var(--ink-strong); line-height: 1.6; }
+.static-list a:hover { color: var(--primary); }
+.static-list .d { flex: none; font-family: var(--font-data); font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.list-gap { margin-bottom: 48px; }
+.post-nav { max-width: 780px; margin: 40px auto 56px; }
+.post-nav .pn-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 36px; }
+.post-nav .pn { display: block; background: var(--surface); border-radius: 14px; padding: 14px 16px; font-size: 14px; font-weight: 700; line-height: 1.6; color: var(--ink-strong); box-shadow: 0 2px 8px rgba(15,27,51,.04), 0 1px 2px rgba(15,27,51,.03); }
+.post-nav span.pn { background: none; box-shadow: none; }
+.post-nav .pn small { display: block; font-size: 11.5px; font-weight: 500; color: var(--muted); margin-bottom: 4px; }
+.post-nav .pn.newer { text-align: right; }
+.post-nav a.pn:hover { color: var(--primary); }
+.archive { max-width: 780px; margin: 0 auto 56px; }
+.archive .sec-title { margin-top: 36px; }
+.archive .sec-title .n { font-size: 12px; font-weight: 500; color: var(--muted); margin-left: 10px; }
+@media (max-width: 560px) { .post-nav .pn-row { grid-template-columns: 1fr; } .static-list li { flex-direction: column; gap: 2px; } }

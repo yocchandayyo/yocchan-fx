@@ -33,7 +33,7 @@ jobs:
 
       - name: 差分があればコミット
         run: |
-          git add post sitemap.xml robots.txt
+          git add post sitemap.xml robots.txt archive.html index.html articles.html
           if git diff --cached --quiet; then
             echo "差分なし(ローカルでビルド済み)"
             exit 0

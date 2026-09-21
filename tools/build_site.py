@@ -25,7 +25,7 @@ AUTHOR = "よっちゃん(FX歴8年)"
 GA_ID = "G-M79V6CNK6L"
 ADSENSE_CLIENT = "ca-pub-6679576726407478"
 TCS_AC = "C142787"
-CSS_VER = "26"
+CSS_VER = "27"
 
 CAT = {
     "analysis": ("相場分析", "c-analysis"),
@@ -128,6 +128,7 @@ def header_footer(active_cat=None):
     <nav class="fnav" aria-label="フッターナビゲーション">
       <a href="/">ホーム</a>
       <a href="/articles.html">記事一覧</a>
+      <a href="/archive.html">全記事一覧</a>
       <a href="/brokers.html">口座比較</a>
       <a href="/vps.html">自動売買向けVPS</a>
       <a href="/calendar.html">経済指標カレンダー</a>
@@ -270,6 +271,7 @@ def build_page(a, verification_tag="", latest_market_article=None):
   <article class="article-detail">
       {article_body(a, latest_market_article)}
   </article>
+  {post_nav(a)}
 </main>
 
 {footer}
@@ -278,8 +280,105 @@ def build_page(a, verification_tag="", latest_market_article=None):
 '''
 
 
+
+ALL_ARTICLES = []  # main() で日付降順に詰める。記事間の静的リンク生成に使う
+
+
+def static_card_list(items):
+    """JSが描画する前(=クローラが最初に読むHTML)にも記事リンクが存在するようにする素のリスト。"""
+    lis = "".join(
+        f'<li><a href="/post/{a["id"]}.html">{esc(a["title"])}</a><span class="d">{fmt_full_date(a["date"])}</span></li>'
+        for a in items)
+    return f'<ul class="static-list">{lis}</ul>'
+
+
+def post_nav(a):
+    """記事ページ下部の「前後の記事」と「同じカテゴリの最近の記事」。すべて素のHTMLリンク。"""
+    ids = [x["id"] for x in ALL_ARTICLES]
+    i = ids.index(a["id"])
+    newer = ALL_ARTICLES[i - 1] if i > 0 else None
+    older = ALL_ARTICLES[i + 1] if i + 1 < len(ALL_ARTICLES) else None
+    is_basic = a["category"] == "technical"
+    same = [x for x in ALL_ARTICLES if x["id"] != a["id"] and ((x["category"] == "technical") == is_basic)][:6]
+    parts = ['<nav class="post-nav" aria-label="ほかの記事">']
+    parts.append('<div class="pn-row">')
+    parts.append(f'<a class="pn older" href="/post/{older["id"]}.html"><small>← 前の記事</small>{esc(older["title"])}</a>' if older else '<span class="pn"></span>')
+    parts.append(f'<a class="pn newer" href="/post/{newer["id"]}.html"><small>次の記事 →</small>{esc(newer["title"])}</a>' if newer else '<span class="pn"></span>')
+    parts.append('</div>')
+    if same:
+        head = "FX入門の最近の記事" if is_basic else "相場観の最近の記事"
+        parts.append(f'<h2 class="sec-title">{head}</h2>{static_card_list(same)}')
+    parts.append('<p class="sec-more"><a href="/archive.html">全記事の一覧を見る →</a></p></nav>')
+    return "".join(parts)
+
+
+def build_archive(articles, verification_tag=""):
+    header, footer = header_footer()
+    months = {}
+    for a in articles:
+        months.setdefault(a["date"][:7], []).append(a)
+    blocks = []
+    for ym in sorted(months, reverse=True):
+        y, m = ym.split("-")
+        blocks.append(f'<h2 class="sec-title">{int(y)}年{int(m)}月<small class="n">{len(months[ym])}本</small></h2>{static_card_list(months[ym])}')
+    return f'''<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="canonical" href="{SITE}/archive.html">
+<title>全記事一覧 | よっちゃんのFX</title>
+<meta name="description" content="よっちゃんのFXで公開した記事を月別に並べた一覧です。毎朝の相場観とFX入門のすべての記事にここから行けます。">
+{verification_tag}
+<meta property="og:site_name" content="よっちゃんのFX">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="全記事一覧 | よっちゃんのFX">
+<meta property="og:type" content="website">
+<meta property="og:url" content="{SITE}/archive.html">
+<meta property="og:image" content="{SITE}/assets/img/fx_cover.png?v=3">
+<link rel="icon" type="image/png" href="/assets/img/fx_icon.png?v=3">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="{FONTS}" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css?v={CSS_VER}">
+</head>
+<body data-page="archive">
+
+{header}
+
+<main class="wrap">
+<nav class="breadcrumb" aria-label="パンくずリスト">
+  <a href="/">ホーム</a> &gt; <span>全記事一覧</span>
+</nav>
+  <div class="page-head">
+    <p class="eyebrow">ARCHIVE</p>
+    <h1>全記事一覧</h1>
+    <p class="sub">公開した{len(articles)}本を新しい順に、月ごとに並べています。</p>
+  </div>
+  <div class="archive">
+    {"".join(blocks)}
+  </div>
+</main>
+
+{footer}
+</body>
+</html>
+'''
+
+
+def inject_static(path, marker, html):
+    """静的HTMLの <!--STATIC:marker--> ... <!--/STATIC:marker--> の間を差し替える(JS描画前の初期リンク)。"""
+    f = ROOT / path
+    t = f.read_text(encoding="utf-8")
+    pat = re.compile(r"(<!--STATIC:%s-->).*?(<!--/STATIC:%s-->)" % (marker, marker), re.S)
+    if not pat.search(t):
+        return False
+    f.write_text(pat.sub(lambda m: m.group(1) + html + m.group(2), t), encoding="utf-8", newline="")
+    return True
+
+
 def build_sitemap(articles):
-    static = ["", "articles.html", "brokers.html", "vps.html", "calendar.html", "about.html", "contact.html", "review-sbifx.html"]
+    static = ["", "articles.html", "archive.html", "brokers.html", "vps.html", "calendar.html", "about.html", "contact.html", "review-sbifx.html"]
     latest = articles[0]["date"] if articles else ""
     rows = [f"  <url><loc>{SITE}/{p}</loc><lastmod>{latest}</lastmod></url>" for p in static]
     for a in articles:
@@ -294,8 +393,15 @@ def main():
     tag_file = ROOT / "tools" / "gsc_verification.txt"
     verification_tag = tag_file.read_text(encoding="utf-8").strip() if tag_file.exists() else ""
     latest_market_article = next((x for x in articles if x["category"] in ("analysis", "news")), None)
+    ALL_ARTICLES[:] = articles
     for a in articles:
         (OUT_DIR / f"{a['id']}.html").write_text(build_page(a, verification_tag, latest_market_article), encoding="utf-8")
+    (ROOT / "archive.html").write_text(build_archive(articles, verification_tag), encoding="utf-8")
+    market = [x for x in articles if x["category"] in ("analysis", "news")]
+    basics = [x for x in articles if x["category"] == "technical"]
+    inject_static("index.html", "market", static_card_list(market[:8]))
+    inject_static("index.html", "basics", static_card_list(basics[:8]))
+    inject_static("articles.html", "all", static_card_list(articles))
     (ROOT / "sitemap.xml").write_text(build_sitemap(articles), encoding="utf-8")
     (ROOT / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {SITE}/sitemap.xml\n", encoding="utf-8")
     print(f"built {len(articles)} pages -> post/, sitemap.xml, robots.txt")
