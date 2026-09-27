@@ -957,6 +957,15 @@
           "prev": "--",
           "forecast": "--",
           "imp": "mid"
+        },
+        {
+          "time": "23:00",
+          "flag": "US",
+          "country": "米",
+          "name": "JOLTS求人件数(8月)",
+          "prev": "727.1万件",
+          "forecast": "722.5万件",
+          "imp": "mid"
         }
       ]
     },
@@ -974,12 +983,21 @@
           "imp": "mid"
         },
         {
+          "time": "21:15",
+          "flag": "US",
+          "country": "米",
+          "name": "ADP雇用統計(9月・前月比)",
+          "prev": "+3.8万人",
+          "forecast": "+7.0万人",
+          "imp": "mid"
+        },
+        {
           "time": "21:30",
           "flag": "US",
           "country": "米",
-          "name": "PCEデフレータ(8月分・前年比)",
+          "name": "コアPCEデフレータ(8月分・前年比)",
           "prev": "--",
-          "forecast": "--",
+          "forecast": "+3.3%",
           "imp": "hi"
         },
         {
@@ -1053,8 +1071,8 @@
           "flag": "US",
           "country": "米",
           "name": "雇用統計(非農業部門雇用者数・失業率、9月分)",
-          "prev": "--",
-          "forecast": "--",
+          "prev": "+16.3万人/4.1%",
+          "forecast": "+10.0万人/4.1%",
           "imp": "hi"
         }
       ]
