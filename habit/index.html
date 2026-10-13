@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>リズムキープ | 昼夜逆転を防ぐ生活リズムアプリ</title>
+<meta name="description" content="「起きた」「寝る」をワンタップで記録して、昼夜逆転を防ぐ生活リズムアプリ。データはブラウザ内にのみ保存されます。">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#12142B">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="リズムキープ">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@700;900&family=Noto+Sans+JP:wght@400;500;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #12142B;
+    --bg-soft: #1B1E3D;
+    --surface: #232752;
+    --surface-2: #2B2F63;
+    --ink: #F2F3FA;
+    --muted: #A6ABD6;
+    --line: #35396B;
+    --primary: #7C8CFF;
+    --sun: #FFB258;
+    --sun-soft: #4A3A24;
+    --good: #34D399;
+    --good-soft: #123B31;
+    --shift: #FBBF24;
+    --shift-soft: #3D3417;
+    --recover: #A78BFA;
+    --recover-soft: #2E2550;
+    --radius: 18px;
+    --shadow: 0 1px 2px rgba(0,0,0,.2), 0 10px 30px rgba(0,0,0,.25);
+    --font-display: "Zen Kaku Gothic New", "Noto Sans JP", sans-serif;
+    --font-body: "Noto Sans JP", sans-serif;
+    --font-data: "IBM Plex Mono", "Consolas", monospace;
+    --maxw: 560px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: radial-gradient(circle at 20% -10%, #262a5c 0%, var(--bg) 55%) fixed;
+    background-color: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    padding: env(safe-area-inset-top) 0 60px;
+    min-height: 100vh;
+  }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 16px; }
+
+  header.top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 22px 0 16px;
+  }
+  header.top h1 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 19px;
+  }
+  header.top .clock {
+    font-family: var(--font-data);
+    font-size: 14px;
+    color: var(--muted);
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 20px;
+    margin-bottom: 14px;
+  }
+  .card h2 {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .muted { color: var(--muted); }
+  .small { font-size: 12.5px; }
+
+  /* ---- main action card ---- */
+  .action { text-align: center; padding: 28px 20px 22px; }
+  .action .eyebrow { font-size: 13px; color: var(--muted); }
+  .action .headline {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 1.45;
+    margin: 6px 0 4px;
+  }
+  .action .sub { font-size: 14px; color: var(--muted); }
+  .action.night { background: linear-gradient(160deg, #262a5c, #1a1c3f); }
+  .action.morning { background: linear-gradient(160deg, #3a3350, #2a2750); }
+  .action.recover { background: linear-gradient(160deg, #332a5c, #232752); }
+  .countdown {
+    font-family: var(--font-data);
+    font-size: 40px;
+    font-weight: 600;
+    color: var(--primary);
+    line-height: 1.2;
+    margin: 10px 0 2px;
+  }
+  .big-btn {
+    display: block;
+    width: 100%;
+    margin-top: 18px;
+    border: none;
+    border-radius: 14px;
+    padding: 18px;
+    font-size: 18px;
+    font-weight: 700;
+    font-family: var(--font-body);
+    cursor: pointer;
+    color: #0D1030;
+    background: var(--sun);
+    -webkit-tap-highlight-color: transparent;
+  }
+  .big-btn.night { background: var(--primary); }
+  .big-btn:active { transform: scale(.98); }
+  .link-btn {
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-size: 13px;
+    font-family: var(--font-body);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+    margin-top: 14px;
+    padding: 4px;
+  }
+
+  /* ---- one-tap task ---- */
+  .task {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    text-align: left;
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 14px;
+    margin-top: 10px;
+    color: var(--ink);
+    font-size: 14.5px;
+    font-family: var(--font-body);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .task .box {
+    flex: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid var(--muted);
+    display: grid;
+    place-items: center;
+    font-size: 14px;
+    color: #0D1030;
+  }
+  .task.done { border-color: var(--good); background: var(--good-soft); }
+  .task.done .box { background: var(--good); border-color: var(--good); }
+  .task .desc { display: block; font-size: 12px; color: var(--muted); }
+  .plan { text-align: left; margin-top: 14px; }
+  .plan .step {
+    display: flex;
+    gap: 10px;
+    font-size: 14px;
+    padding: 8px 0;
+    border-top: 1px solid var(--line);
+  }
+  .plan .step:first-child { border-top: none; }
+  .plan .num {
+    flex: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--recover-soft);
+    color: var(--recover);
+    font-size: 12px;
+    font-weight: 700;
+    display: grid;
+    place-items: center;
+    margin-top: 2px;
+  }
+
+  /* ---- week ---- */
+  .week-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 12px;
+  }
+  .week-head h2 { margin: 0; }
+  .week-score { font-family: var(--font-data); font-size: 14px; color: var(--good); }
+  .week-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+  .day-cell {
+    border-radius: 10px;
+    padding: 8px 2px;
+    text-align: center;
+    border: 1px solid var(--line);
+    background: var(--bg-soft);
+    min-width: 0;
+  }
+  .day-cell .dow { font-size: 11px; color: var(--muted); }
+  .day-cell .date { font-size: 11.5px; font-weight: 700; margin: 1px 0 4px; }
+  .day-cell .time { font-family: var(--font-data); font-size: 11px; }
+  .day-cell.good { border-color: var(--good); background: var(--good-soft); }
+  .day-cell.shift { border-color: var(--shift); background: var(--shift-soft); }
+  .day-cell.recover { border-color: var(--recover); background: var(--recover-soft); }
+  .day-cell.today { outline: 2px solid var(--primary); outline-offset: 1px; }
+  .legend { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 10px; font-size: 11.5px; color: var(--muted); }
+  .legend i { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 5px; }
+
+  /* ---- settings / edit ---- */
+  details.card { padding: 0; }
+  details.card summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 16px 20px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 15px;
+    display: flex;
+    justify-content: space-between;
+  }
+  details.card summary::-webkit-details-marker { display: none; }
+  details.card summary::after { content: "＋"; color: var(--muted); }
+  details.card[open] summary::after { content: "－"; }
+  details.card .inner { padding: 0 20px 20px; }
+  .row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+  .field { flex: 1; min-width: 130px; }
+  .field label { display: block; font-size: 12.5px; color: var(--muted); margin-bottom: 6px; }
+  input[type="time"], input[type="number"] {
+    width: 100%;
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 10px 12px;
+    color: var(--ink);
+    font-family: var(--font-data);
+    font-size: 16px;
+    color-scheme: dark;
+  }
+  input:focus { outline: 2px solid var(--primary); outline-offset: 1px; }
+  .btn {
+    background: var(--primary);
+    color: #0D1030;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 16px;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    font-family: var(--font-body);
+  }
+  .btn.ghost { background: transparent; color: var(--muted); border: 1px solid var(--line); font-weight: 500; }
+  .hint { font-size: 12px; color: var(--muted); margin-top: -4px; margin-bottom: 12px; }
+
+  footer.note {
+    text-align: center;
+    font-size: 11.5px;
+    color: var(--muted);
+    margin-top: 24px;
+    padding: 0 20px;
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <h1>🌗 リズムキープ</h1>
+    <span class="clock" id="clock"></span>
+  </header>
+
+  <!-- the one thing to do right now; content depends on the time of day -->
+  <section class="card action" id="actionCard"></section>
+
+  <section class="card">
+    <div class="week-head">
+      <h2>この7日間</h2>
+      <span class="week-score" id="weekScore"></span>
+    </div>
+    <div class="week-grid" id="weekGrid"></div>
+    <div class="legend">
+      <span><i style="background:var(--good)"></i>目標どおり</span>
+      <span><i style="background:var(--shift)"></i>ちょっとズレ</span>
+      <span><i style="background:var(--recover)"></i>立て直しの日</span>
+    </div>
+  </section>
+
+  <details class="card" id="editBox">
+    <summary>記録を直す</summary>
+    <div class="inner">
+      <p class="hint">押し忘れた日は、ここであとから入れられます。</p>
+      <div class="row">
+        <div class="field">
+          <label for="editDate">日付</label>
+          <input type="date" id="editDate" style="width:100%;background:var(--bg-soft);border:1px solid var(--line);border-radius:10px;padding:10px 12px;color:var(--ink);font-size:16px;color-scheme:dark;">
+        </div>
+      </div>
+      <div class="row">
+        <div class="field">
+          <label for="editWake">起きた時刻</label>
+          <input type="time" id="editWake">
+        </div>
+        <div class="field">
+          <label for="editSleep">前の夜に寝た時刻</label>
+          <input type="time" id="editSleep">
+        </div>
+      </div>
+      <button class="btn" id="editSave">保存</button>
+    </div>
+  </details>
+
+  <details class="card">
+    <summary>目標の設定</summary>
+    <div class="inner">
+      <div class="row">
+        <div class="field">
+          <label for="targetWakeInput">起きる時刻</label>
+          <input type="time" id="targetWakeInput">
+        </div>
+        <div class="field">
+          <label for="targetBedInput">布団に入る時刻</label>
+          <input type="time" id="targetBedInput">
+        </div>
+      </div>
+      <div class="row">
+        <div class="field">
+          <label for="allowedDriftInput">起床のズレをどこまで許すか（分）</label>
+          <input type="number" id="allowedDriftInput" min="0" max="180" step="5">
+        </div>
+      </div>
+      <p class="hint">布団に入る時刻の1時間前から「寝る準備」の画面になります。</p>
+      <button class="btn ghost" id="resetBtn">全データをリセット</button>
+    </div>
+  </details>
+
+  <footer class="note">
+    データはこの端末のブラウザ内にだけ保存されます（送信なし）。<br>
+    ホーム画面に追加すると、アプリのようにワンタップで開けます。
+  </footer>
+</div>
+
+<script>
+(function () {
+  var STORAGE_KEY = 'rhythmkeep:v1';
+  var NIGHT_LEAD_MIN = 60;      // "get ready for bed" screen starts this long before target bedtime
+  var NIGHT_END_MIN = 4 * 60;   // after 04:00 we stop treating it as "last night"
+  var DOW = ['日', '月', '火', '水', '木', '金', '土'];
+
+  function defaultState() {
+    return { targetWake: '07:00', targetBed: '23:30', allowedDrift: 60, logs: {} };
+  }
+
+  function loadState() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return defaultState();
+      var parsed = JSON.parse(raw);
+      return Object.assign(defaultState(), parsed, { logs: parsed.logs || {} });
+    } catch (e) {
+      return defaultState();
+    }
+  }
+
+  function saveState() {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) { /* storage unavailable */ }
+  }
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+  function dateKey(d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
+  function hhmm(d) { return pad(d.getHours()) + ':' + pad(d.getMinutes()); }
+  function toMin(t) { if (!t) return null; var p = t.split(':'); return +p[0] * 60 + +p[1]; }
+  function fromMin(m) { m = ((m % 1440) + 1440) % 1440; return pad(Math.floor(m / 60)) + ':' + pad(m % 60); }
+  function addDays(d, n) { var x = new Date(d); x.setDate(x.getDate() + n); return x; }
+
+  // true if minute-of-day `m` lies in [start, end), handling windows that cross midnight
+  function inWindow(m, start, end) {
+    return ((m - start + 1440) % 1440) < ((end - start + 1440) % 1440);
+  }
+
+  function entry(key) { return state.logs[key]; }
+  function ensure(key) {
+    if (!state.logs[key]) state.logs[key] = { wake: null, sleep: null, habits: {} };
+    if (!state.logs[key].habits) state.logs[key].habits = {};
+    return state.logs[key];
+  }
+
+  // Waking earlier than the target is never counted against you; only late drift matters.
+  function statusFor(e) {
+    if (!e || !e.wake) return 'none';
+    var diff = Math.max(0, toMin(e.wake) - toMin(state.targetWake));
+    if (diff <= state.allowedDrift) return 'good';
+    if (diff <= state.allowedDrift + 120) return 'shift';
+    return 'recover';
+  }
+
+  var state = loadState();
+  var $ = function (id) { return document.getElementById(id); };
+
+  // ---------------- action card ----------------
+
+  // A night belongs to the day you wake up from it: "寝る" at 23:40 on 9/28 is stored on 9/29.
+  function nightKey(now) {
+    return now.getHours() >= 12 ? dateKey(addDays(now, 1)) : dateKey(now);
+  }
+
+  function taskButton(id, key, label, desc) {
+    var done = !!(entry(key) && entry(key).habits && entry(key).habits[id]);
+    return '<button class="task' + (done ? ' done' : '') + '" data-task="' + id + '" data-key="' + key + '">' +
+      '<span class="box">' + (done ? '✓' : '') + '</span>' +
+      '<span>' + label + (desc ? '<span class="desc">' + desc + '</span>' : '') + '</span></button>';
+  }
+
+  function renderNight(now, nowMin) {
+    var nk = nightKey(now);
+    var e = entry(nk);
+    var bed = toMin(state.targetBed);
+    var html;
+    if (e && e.sleep) {
+      html =
+        '<div class="eyebrow">' + e.sleep + ' に寝る準備OK</div>' +
+        '<div class="headline">おやすみなさい 🌙</div>' +
+        '<div class="sub">スマホは手の届かないところへ。<br>明日は <b>' + state.targetWake + '</b> に起きる。寝るのが遅くなっても、起きる時刻はそのままで。</div>' +
+        '<button class="link-btn" data-act="undo-sleep" data-key="' + nk + '">まだ寝てない（取り消す）</button>';
+    } else {
+      var left = (bed - nowMin + 1440) % 1440;
+      var over = left > 720; // bedtime has already passed
+      html =
+        '<div class="eyebrow">寝る準備の時間</div>' +
+        (over
+          ? '<div class="headline">布団に入る時刻を<br>過ぎています</div><div class="sub">今からでも大丈夫。画面を消して横になろう。</div>'
+          : '<div class="countdown">' + Math.floor(left / 60) + ':' + pad(left % 60) + '</div><div class="sub">' + state.targetBed + ' に布団に入るまで</div>') +
+        taskButton('dim', nk, '部屋の明かりを落とした', '強い光は眠気のホルモンを止めてしまう') +
+        '<button class="big-btn night" data-act="sleep">スマホを置いて寝る</button>';
+    }
+    $('actionCard').className = 'card action night';
+    $('actionCard').innerHTML = html;
+  }
+
+  function renderWake(now) {
+    $('actionCard').className = 'card action morning';
+    $('actionCard').innerHTML =
+      '<div class="eyebrow">目標 ' + state.targetWake + '</div>' +
+      '<div class="headline">おはよう ☀️</div>' +
+      '<div class="sub">起きたら押すだけ。何時でもOK。</div>' +
+      '<button class="big-btn" data-act="wake">起きた</button>';
+  }
+
+  function renderDay(now) {
+    var tk = dateKey(now);
+    var e = entry(tk);
+    var st = statusFor(e);
+    var html;
+    if (st === 'recover') {
+      $('actionCard').className = 'card action recover';
+      html =
+        '<div class="eyebrow">' + e.wake + ' 起床</div>' +
+        '<div class="headline">今日は立て直しの日</div>' +
+        '<div class="sub">責めなくて大丈夫。今日やるのはこの3つだけ。</div>' +
+        '<div class="plan">' +
+          '<div class="step"><span class="num">1</span><span>今すぐ外の光を浴びる（ベランダ・窓際で5分でも）</span></div>' +
+          '<div class="step"><span class="num">2</span><span>眠くても昼寝はしない。どうしてもなら20分だけ</span></div>' +
+          '<div class="step"><span class="num">3</span><span>明日は <b>' + state.targetWake + '</b> に起きる。今夜寝るのが遅くなっても、ここだけ守る</span></div>' +
+        '</div>' +
+        taskButton('sunlight', tk, '光を浴びた', null);
+    } else {
+      $('actionCard').className = 'card action morning';
+      html =
+        '<div class="eyebrow">' + e.wake + ' 起床</div>' +
+        '<div class="headline">' + (st === 'good' ? 'いいスタート' : 'ちょっと遅めのスタート') + '</div>' +
+        '<div class="sub">体内時計を「朝」に合わせるのは、起きてすぐの光。</div>' +
+        taskButton('sunlight', tk, 'カーテンを開けて光を浴びた', '曇りの日の外の光でも、室内の照明よりずっと強い') +
+        '<div class="sub small" style="margin-top:14px;">今夜は ' + fromMin(toMin(state.targetBed) - NIGHT_LEAD_MIN) + ' から寝る準備モードになります</div>';
+    }
+    html += '<button class="link-btn" data-act="undo-wake" data-key="' + tk + '">起きた時刻を取り消す</button>';
+    $('actionCard').innerHTML = html;
+  }
+
+  function renderAction() {
+    var now = new Date();
+    var nowMin = now.getHours() * 60 + now.getMinutes();
+    var nightStart = toMin(state.targetBed) - NIGHT_LEAD_MIN;
+    var todayEntry = entry(dateKey(now));
+    var wokeToday = !!(todayEntry && todayEntry.wake);
+
+    if (inWindow(nowMin, (nightStart + 1440) % 1440, NIGHT_END_MIN) && !(nowMin < NIGHT_END_MIN && wokeToday)) {
+      renderNight(now, nowMin);
+    } else if (!wokeToday) {
+      renderWake(now);
+    } else {
+      renderDay(now);
+    }
+  }
+
+  // ---------------- week ----------------
+
+  function renderWeek() {
+    var today = new Date();
+    var grid = $('weekGrid');
+    grid.innerHTML = '';
+    var good = 0, logged = 0;
+    for (var i = 6; i >= 0; i--) {
+      var d = addDays(today, -i);
+      var key = dateKey(d);
+      var e = entry(key);
+      var st = statusFor(e);
+      if (st !== 'none') logged++;
+      if (st === 'good') good++;
+      var cell = document.createElement('div');
+      cell.className = 'day-cell ' + st + (i === 0 ? ' today' : '');
+      cell.innerHTML =
+        '<div class="dow">' + DOW[d.getDay()] + '</div>' +
+        '<div class="date">' + (d.getMonth() + 1) + '/' + d.getDate() + '</div>' +
+        '<div class="time">' + (e && e.wake ? e.wake : '·') + '</div>';
+      grid.appendChild(cell);
+    }
+    // counts days that went well; a bad day never erases the good ones
+    $('weekScore').textContent = logged ? '目標どおり ' + good + '日' : '';
+  }
+
+  function renderClock() { $('clock').textContent = hhmm(new Date()); }
+
+  function renderAll() {
+    renderClock();
+    renderAction();
+    renderWeek();
+  }
+
+  // ---------------- events ----------------
+
+  $('actionCard').addEventListener('click', function (ev) {
+    var btn = ev.target.closest('button');
+    if (!btn) return;
+    var now = new Date();
+    var act = btn.getAttribute('data-act');
+    var task = btn.getAttribute('data-task');
+    if (task) {
+      var te = ensure(btn.getAttribute('data-key'));
+      te.habits[task] = !te.habits[task];
+    } else if (act === 'wake') {
+      ensure(dateKey(now)).wake = hhmm(now);
+    } else if (act === 'sleep') {
+      ensure(nightKey(now)).sleep = hhmm(now);
+    } else if (act === 'undo-wake') {
+      ensure(btn.getAttribute('data-key')).wake = null;
+    } else if (act === 'undo-sleep') {
+      ensure(btn.getAttribute('data-key')).sleep = null;
+    } else {
+      return;
+    }
+    saveState();
+    renderAll();
+  });
+
+  function loadEditFields() {
+    var e = entry($('editDate').value) || {};
+    $('editWake').value = e.wake || '';
+    $('editSleep').value = e.sleep || '';
+  }
+  $('editDate').value = dateKey(new Date());
+  $('editDate').max = dateKey(new Date());
+  $('editDate').addEventListener('change', loadEditFields);
+  $('editBox').addEventListener('toggle', loadEditFields);
+  $('editSave').addEventListener('click', function () {
+    var key = $('editDate').value;
+    if (!key) return;
+    var e = ensure(key);
+    e.wake = $('editWake').value || null;
+    e.sleep = $('editSleep').value || null;
+    saveState();
+    renderAll();
+    $('editSave').textContent = '保存しました';
+    setTimeout(function () { $('editSave').textContent = '保存'; }, 1500);
+  });
+
+  $('targetWakeInput').value = state.targetWake;
+  $('targetBedInput').value = state.targetBed;
+  $('allowedDriftInput').value = state.allowedDrift;
+  $('targetWakeInput').addEventListener('change', function () {
+    state.targetWake = this.value || '07:00'; saveState(); renderAll();
+  });
+  $('targetBedInput').addEventListener('change', function () {
+    state.targetBed = this.value || '23:30'; saveState(); renderAll();
+  });
+  $('allowedDriftInput').addEventListener('change', function () {
+    var v = parseInt(this.value, 10);
+    state.allowedDrift = isNaN(v) ? 60 : Math.max(0, Math.min(180, v));
+    this.value = state.allowedDrift;
+    saveState(); renderAll();
+  });
+  $('resetBtn').addEventListener('click', function () {
+    if (!confirm('すべての記録を削除します。よろしいですか？')) return;
+    state = defaultState();
+    saveState();
+    $('targetWakeInput').value = state.targetWake;
+    $('targetBedInput').value = state.targetBed;
+    $('allowedDriftInput').value = state.allowedDrift;
+    renderAll();
+  });
+
+  // keep the screen in sync with the clock (countdown, switching into night mode)
+  setInterval(renderAll, 30 * 1000);
+  document.addEventListener('visibilitychange', function () { if (!document.hidden) renderAll(); });
+
+  renderAll();
+})();
+</script>
+
+</body>
+</html>
