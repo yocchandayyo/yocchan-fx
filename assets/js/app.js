@@ -35,7 +35,9 @@
   /* ---------- 広告(TCSアフィリエイト) ----------
      提携中の案件のみ。バナー画像はTCS側で差し替わるので、こちらはIDだけ持つ。
      景表法のステマ規制に合わせて、必ず「PR」表記とリスク注記を一緒に出す。 */
-  const TCS_AC = "C142787";
+  // SBI FXトレードはTCSで記事確認中(未承認)。承認されたら SBI_URL を tcs-asp.net/alink?...LC=SBI50... に戻し、relにsponsoredを足す
+const SBI_URL = "https://www.sbifxt.co.jp/";
+const TCS_AC = "C142787";
   const ADS = {
     dmm:     { lc: "DMM2",  isq: 55,  alt: "DMM FX 口座開設" },
     gaitame: { lc: "NJT2",  isq: 74,  alt: "外為オンライン 口座開設" },
@@ -58,7 +60,7 @@
   const adBox = (keys, title, more) =>
     `<div class="ad-box"><div class="ad-head"><span class="ad-pr">PR</span>${title}</div>` +
     `<div class="ad-grid">${keys.map(adItem).join("")}</div>` +
-    `<p class="ad-more"><a href="https://www.tcs-asp.net/alink?AC=${TCS_AC}&LC=SBI50&SQ=0&isq=1" target="_blank" rel="nofollow sponsored noopener">1通貨から練習するなら SBI FXトレード →</a> 1通貨から取引でき、ドル円スプレッドが狭い。評判基準の比較で1位に置いています</p>` +
+    `<p class="ad-more"><a href="${SBI_URL}" target="_blank" rel="nofollow noopener">1通貨から練習するなら SBI FXトレード →</a> 1通貨から取引でき、ドル円スプレッドが狭い。評判基準の比較で1位に置いています</p>` +
     `<p class="ad-more"><a href="https://www.tradingview.com/?aff_id=170482" target="_blank" rel="nofollow sponsored noopener">チャート分析に使っている TradingView →</a></p>` +
     (more ? `<p class="ad-more"><a href="brokers.html">選定は単価ではなく評判(満足度・処分歴・障害歴)で決めています → 口座比較</a></p>` : "") +
     `<p class="ad-note">${AD_NOTE}</p></div>`;

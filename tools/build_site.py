@@ -25,7 +25,7 @@ AUTHOR = "よっちゃん(FX歴8年)"
 GA_ID = "G-M79V6CNK6L"
 ADSENSE_CLIENT = "ca-pub-6679576726407478"
 TCS_AC = "C142787"
-CSS_VER = "27"
+CSS_VER = "28"
 
 CAT = {
     "analysis": ("相場分析", "c-analysis"),
@@ -67,6 +67,10 @@ def hero_svg(direction):
             f'<polyline points="{pts}"></polyline></svg>')
 
 
+# SBI FXトレードはTCSで記事確認中(未承認)。承認されたら tcs_link("SBI50", 1) に戻し、relにsponsoredを足す(app.jsのSBI_URLも)
+SBI_URL = "https://www.sbifxt.co.jp/"
+
+
 def tcs_link(lc, isq):
     return f"https://www.tcs-asp.net/alink?AC={TCS_AC}&amp;LC={lc}&amp;SQ=0&amp;isq={isq}"
 
@@ -95,7 +99,7 @@ def ad_box():
     return (
         '<div class="ad-box"><div class="ad-head"><span class="ad-pr">PR</span>FX口座の開設はこちら</div>'
         '<div class="ad-grid">' + ad_item("MTI2", 205, "松井証券 FX口座開設", "matsui") + ad_item("HIR99", 48, "ヒロセ通商 LION FX 口座開設", "hirose") + '</div>'
-        f'<p class="ad-more"><a href="{tcs_link("SBI50", 1)}" target="_blank" rel="nofollow sponsored noopener">1通貨から練習するなら SBI FXトレード →</a> 1通貨から取引でき、ドル円スプレッドが狭い。評判基準の比較で1位に置いています</p>'
+        f'<p class="ad-more"><a href="{SBI_URL}" target="_blank" rel="nofollow noopener">1通貨から練習するなら SBI FXトレード →</a> 1通貨から取引でき、ドル円スプレッドが狭い。評判基準の比較で1位に置いています</p>'
         '<p class="ad-more"><a href="https://www.tradingview.com/?aff_id=170482" target="_blank" rel="nofollow sponsored noopener">チャート分析に使っている TradingView →</a></p>'
         '<p class="ad-more"><a href="/brokers.html">選定は単価ではなく評判(満足度・処分歴・障害歴)で決めています → 口座比較</a></p>'
         f'<p class="ad-note">{AD_NOTE}</p></div>'
