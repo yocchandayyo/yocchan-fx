@@ -272,7 +272,11 @@ const TCS_AC = "C142787";
       fetchJSON("data/calendar.json"),
       fetchJSON("data/rates.json").catch(() => null)
     ]);
-    const featured = articles.find(a => a.featured) || articles[0];
+    // featured付きの記事が最新記事より3日以上古いときは、最新記事を「今朝の一本」に出す
+    // (朝の相場観の自動更新を止めた期間に、トップが何週間も同じ記事のままになるのを防ぐ)
+    const newest = articles.reduce((m, a) => (a.date > m.date ? a : m), articles[0]);
+    let featured = articles.find(a => a.featured) || newest;
+    if ((new Date(newest.date) - new Date(featured.date)) / 86400000 > 3) featured = newest;
     const rest = articles.filter(a => a.id !== featured.id);
 
     const fc = CAT[featured.category];
