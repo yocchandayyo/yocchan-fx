@@ -1,5 +1,5 @@
 {
-  "range": "8月3日(月)〜 11月30日(月)・時刻は日本時間",
+  "range": "8月3日(月)〜 12月28日(月)・時刻は日本時間",
   "days": [
     {
       "date": "2026-08-03",
@@ -1535,7 +1535,8 @@
           "name": "BOE政策金利発表・金融政策報告",
           "prev": "--",
           "forecast": "--",
-          "imp": "hi"
+          "imp": "hi",
+          "actual": "4.00%(3.75%から利上げ)"
         },
         {
           "time": "22:30",
@@ -1559,7 +1560,8 @@
           "name": "雇用統計(非農業部門雇用者数・失業率、10月分)",
           "prev": "--",
           "forecast": "--",
-          "imp": "hi"
+          "imp": "hi",
+          "actual": "+16.5万人/失業率4.1%"
         }
       ]
     },
@@ -1640,7 +1642,8 @@
           "name": "消費者物価指数CPI(10月分・総合/コア前年比)",
           "prev": "--",
           "forecast": "--",
-          "imp": "hi"
+          "imp": "hi",
+          "actual": "前月比 総合+0.4%/コア+0.3%"
         }
       ]
     },
@@ -2028,6 +2031,393 @@
           "flag": "CN",
           "country": "中",
           "name": "中国 製造業PMI(国家統計局、11月)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "mid"
+        }
+      ]
+    },
+    {
+      "date": "2026-12-01",
+      "label": "12月1日(火)",
+      "items": [
+        {
+          "time": "--",
+          "flag": "EU",
+          "country": "欧",
+          "name": "ユーロ圏消費者物価指数HICP速報(11月・前年比)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "hi"
+        }
+      ]
+    },
+    {
+      "date": "2026-12-02",
+      "label": "12月2日(水)",
+      "items": [
+        {
+          "time": "0:00",
+          "flag": "US",
+          "country": "米",
+          "name": "JOLTS求人件数(10月)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "mid"
+        }
+      ]
+    },
+    {
+      "date": "2026-12-04",
+      "label": "12月4日(金)",
+      "items": [
+        {
+          "time": "22:30",
+          "flag": "US",
+          "country": "米",
+          "name": "雇用統計(非農業部門雇用者数・失業率、11月分)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "hi"
+        }
+      ]
+    },
+    {
+      "date": "2026-12-08",
+      "label": "12月8日(火)",
+      "items": [
+        {
+          "time": "8:50",
+          "flag": "JP",
+          "country": "日",
+          "name": "7-9月期GDP 2次速報(前期比年率)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "hi"
+        },
+        {
+          "time": "12:30",
+          "flag": "AU",
+          "country": "豪",
+          "name": "RBA政策金利発表(12/7-8開催分)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "hi"
+        },
+        {
+          "time": "22:30",
+          "flag": "US",
+          "country": "米",
+          "name": "貿易収支(10月)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "lo"
+        }
+      ]
+    },
+    {
+      "date": "2026-12-09",
+      "label": "12月9日(水)",
+      "items": [
+        {
+          "time": "10:30",
+          "flag": "CN",
+          "country": "中",
+          "name": "中国 消費者物価指数CPI・生産者物価PPI(11月)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "mid"
+        }
+      ]
+    },
+    {
+      "date": "2026-12-10",
+      "label": "12月10日(木)",
+      "items": [
+        {
+          "time": "0:00",
+          "flag": "US",
+          "country": "米",
+          "name": "中古住宅販売件数(11月・年率)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "lo"
+        },
+        {
+          "time": "4:00",
+          "flag": "US",
+          "country": "米",
+          "name": "FOMC政策金利発表・経済見通し(12/8-9開催分)※時刻は通例",
+          "prev": "3.75〜4.00%",
+          "forecast": "--",
+          "imp": "hi"
+        },
+        {
+          "time": "4:30",
+          "flag": "US",
+          "country": "米",
+          "name": "FOMC後 FRB議長 記者会見 ※時刻は通例",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "hi"
+        },
+        {
+          "time": "22:30",
+          "flag": "US",
+          "country": "米",
+          "name": "消費者物価指数CPI(11月分・総合/コア)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "hi"
+        }
+      ]
+    },
+    {
+      "date": "2026-12-11",
+      "label": "12月11日(金)",
+      "items": [
+        {
+          "time": "--",
+          "flag": "GB",
+          "country": "英",
+          "name": "英国 月次GDP(10月)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "mid"
+        }
+      ]
+    },
+    {
+      "date": "2026-12-15",
+      "label": "12月15日(火)",
+      "items": [
+        {
+          "time": "11:00",
+          "flag": "CN",
+          "country": "中",
+          "name": "中国 鉱工業生産・小売売上高(11月)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "mid"
+        },
+        {
+          "time": "22:30",
+          "flag": "US",
+          "country": "米",
+          "name": "生産者物価指数PPI(11月・前月比)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "mid"
+        },
+        {
+          "time": "22:30",
+          "flag": "US",
+          "country": "米",
+          "name": "NY連銀製造業景気指数(12月)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "mid"
+        }
+      ]
+    },
+    {
+      "date": "2026-12-16",
+      "label": "12月16日(水)",
+      "items": [
+        {
+          "time": "22:30",
+          "flag": "US",
+          "country": "米",
+          "name": "小売売上高(11月・前月比)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "hi"
+        }
+      ]
+    },
+    {
+      "date": "2026-12-17",
+      "label": "12月17日(木)",
+      "items": [
+        {
+          "time": "18:30",
+          "flag": "EU",
+          "country": "欧",
+          "name": "独ifo企業景況感指数(12月)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "mid"
+        },
+        {
+          "time": "22:30",
+          "flag": "US",
+          "country": "米",
+          "name": "フィラデルフィア連銀製造業景況指数(12月)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "mid"
+        },
+        {
+          "time": "22:30",
+          "flag": "US",
+          "country": "米",
+          "name": "住宅着工件数(11月)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "lo"
+        },
+        {
+          "time": "--",
+          "flag": "EU",
+          "country": "欧",
+          "name": "ECB理事会 政策金利発表・総裁記者会見(12/16-17開催分)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "hi"
+        },
+        {
+          "time": "--",
+          "flag": "GB",
+          "country": "英",
+          "name": "BOE政策金利発表",
+          "prev": "4.00%",
+          "forecast": "--",
+          "imp": "hi"
+        },
+        {
+          "time": "--",
+          "flag": "AU",
+          "country": "豪",
+          "name": "豪州 雇用統計(11月)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "mid"
+        }
+      ]
+    },
+    {
+      "date": "2026-12-18",
+      "label": "12月18日(金)",
+      "items": [
+        {
+          "time": "8:30",
+          "flag": "JP",
+          "country": "日",
+          "name": "全国消費者物価指数(11月分・生鮮食品除く総合・前年比)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "hi"
+        },
+        {
+          "time": "15:30",
+          "flag": "JP",
+          "country": "日",
+          "name": "日銀総裁 記者会見",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "hi"
+        },
+        {
+          "time": "--",
+          "flag": "JP",
+          "country": "日",
+          "name": "日銀金融政策決定会合 結果発表(12/17-18開催分)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "hi"
+        }
+      ]
+    },
+    {
+      "date": "2026-12-23",
+      "label": "12月23日(水)",
+      "items": [
+        {
+          "time": "22:30",
+          "flag": "US",
+          "country": "米",
+          "name": "7-9月期GDP確報(第3次推計・前期比年率)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "hi"
+        },
+        {
+          "time": "22:30",
+          "flag": "US",
+          "country": "米",
+          "name": "PCEデフレータ(11月分・前年比)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "hi"
+        },
+        {
+          "time": "22:30",
+          "flag": "US",
+          "country": "米",
+          "name": "耐久財受注(11月・前月比)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "hi"
+        }
+      ]
+    },
+    {
+      "date": "2026-12-24",
+      "label": "12月24日(木)",
+      "items": [
+        {
+          "time": "0:00",
+          "flag": "US",
+          "country": "米",
+          "name": "新築住宅販売件数(11月・年率)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "mid"
+        },
+        {
+          "time": "--",
+          "flag": "US",
+          "country": "米",
+          "name": "米国市場 短縮取引(株式は日本時間25日3:00終了)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "lo"
+        }
+      ]
+    },
+    {
+      "date": "2026-12-25",
+      "label": "12月25日(金)",
+      "items": [
+        {
+          "time": "8:30",
+          "flag": "JP",
+          "country": "日",
+          "name": "東京都区部消費者物価指数(12月分・中旬速報)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "mid"
+        },
+        {
+          "time": "--",
+          "flag": "US",
+          "country": "米",
+          "name": "米国市場休場(クリスマス)",
+          "prev": "--",
+          "forecast": "--",
+          "imp": "lo"
+        }
+      ]
+    },
+    {
+      "date": "2026-12-28",
+      "label": "12月28日(月)",
+      "items": [
+        {
+          "time": "--",
+          "flag": "JP",
+          "country": "日",
+          "name": "日銀 主な意見(12/17-18会合分)",
           "prev": "--",
           "forecast": "--",
           "imp": "mid"
